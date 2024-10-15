@@ -63610,7 +63610,13 @@ hands of its owner. Granted by TibiaRoyal.com"/>
 	</item>
 	<item id="34017" article="a" name="lit torch">
 		<attribute key="primarytype" value="light sources"/>
+		<attribute key="showAttributes" value="1"/>
+		<attribute key="description" value="It sparkles slightly"/>
+		<attribute key="absorbpercentholy" value="2"/>
 		<attribute key="weight" value="500"/>
+		<attribute key="script" value="moveevent">
+			<attribute key="slot" value="ammo"/>
+		</attribute>
 	</item>
 	<item id="34018" name="figurine of malice">
 		<attribute key="weight" value="42"/>
@@ -64111,8 +64117,8 @@ hands of its owner. Granted by TibiaRoyal.com"/>
 		<attribute key="shootType" value="suddendeath"/>
 		<attribute key="absorbpercentdeath" value="12"/>
 		<attribute key="magiclevelpoints" value="5"/>
-		<attribute key="criticalhitdamage" value="1000"/>
-		<attribute key="criticalhitdamage" value="1000"/>
+		<attribute key="criticalhitdamage" value="100"/>
+		<attribute key="criticalhitdamage" value="100"/>
 		<attribute key="range" value="6"/>
 		<attribute key="weight" value="1900"/>
 		<attribute key="imbuementslot" value="2">
@@ -67593,6 +67599,7 @@ former students at the Noodles Academy. Awarded by TibiaLabs.com"/>
 		<attribute key="weight" value="2600"/>
 		<attribute key="imbuementslot" value="2">
 			<attribute key="mana leech" value="3"/>
+			<attribute key="skillboost magic level" value="3"/>
 			<attribute key="skillboost axe" value="3"/>
 			<attribute key="skillboost sword" value="3"/>
 			<attribute key="skillboost club" value="3"/>
@@ -67614,6 +67621,7 @@ former students at the Noodles Academy. Awarded by TibiaLabs.com"/>
 		<attribute key="imbuementslot" value="2">
 			<attribute key="mana leech" value="3"/>
 			<attribute key="skillboost axe" value="3"/>
+			<attribute key="skillboost magic level" value="3"/>
 			<attribute key="skillboost sword" value="3"/>
 			<attribute key="skillboost club" value="3"/>
 			<attribute key="skillboost shielding" value="3"/>
@@ -75123,6 +75131,10 @@ Granted by TibiaGoals.com"/>
 		<attribute key="extradef" value="3"/>
 		<attribute key="defense" value="32"/>
 		<attribute key="skillsword" value="5"/>
+		<attribute key="manaleechamount" value="300"/>
+		<attribute key="manaleechchance" value="100"/>
+		<attribute key="lifeleechamount" value="600"/>
+		<attribute key="lifeleechchance" value="100"/>
 		<attribute key="weight" value="6100"/>
 		<attribute key="imbuementslot" value="3">
 			<attribute key="life leech" value="3"/>
@@ -75178,6 +75190,10 @@ Granted by TibiaGoals.com"/>
 		<attribute key="extradef" value="3"/>
 		<attribute key="defense" value="32"/>
 		<attribute key="skillclub" value="5"/>
+		<attribute key="manaleechamount" value="300"/>
+		<attribute key="manaleechchance" value="100"/>
+		<attribute key="lifeleechamount" value="600"/>
+		<attribute key="lifeleechchance" value="100"/>
 		<attribute key="weight" value="6900"/>
 		<attribute key="imbuementslot" value="3">
 			<attribute key="life leech" value="3"/>
@@ -75230,6 +75246,10 @@ Granted by TibiaGoals.com"/>
 		<attribute key="extradef" value="3"/>
 		<attribute key="defense" value="32"/>
 		<attribute key="skillaxe" value="5"/>
+		<attribute key="manaleechamount" value="300"/>
+		<attribute key="manaleechchance" value="100"/>
+		<attribute key="lifeleechamount" value="600"/>
+		<attribute key="lifeleechchance" value="100"/>
 		<attribute key="weight" value="7200"/>
 		<attribute key="imbuementslot" value="3">
 			<attribute key="life leech" value="3"/>
@@ -75280,7 +75300,7 @@ Granted by TibiaGoals.com"/>
 		<attribute key="slotType" value="two-handed"/>
 		<attribute key="elementenergy" value="50"/>
 		<attribute key="criticalhitdamage" value="1200"/>
-		<attribute key="criticalhitdamage" value="1000"/>
+		<attribute key="criticalhitchance" value="1000"/>
 		<attribute key="attack" value="8"/>
 		<attribute key="defense" value="35"/>
 		<attribute key="skillsword" value="5"/>
@@ -75615,6 +75635,8 @@ Granted by TibiaGoals.com"/>
 		<attribute key="weight" value="2200"/>
 		<attribute key="imbuementslot" value="2">
 			<attribute key="mana leech" value="3"/>
+			<attribute key="life leech" value="3"/>
+			<attribute key="life leech" value="3"/>
 			<attribute key="critical hit" value="3"/>
 			<attribute key="skillboost magic level" value="3"/>
 		</attribute>
@@ -75705,10 +75727,15 @@ Granted by TibiaGoals.com"/>
 		<attribute key="magiclevelpoints" value="5"/>
 		<attribute key="earthmagiclevelpoints" value="1"/>
 		<attribute key="icemagiclevelpoints" value="1"/>
+		<attribute key="manaleechamount" value="300"/>
+		<attribute key="manaleechchance" value="100"/>
+		<attribute key="lifeleechamount" value="600"/>
+		<attribute key="lifeleechchance" value="100"/>
 		<attribute key="criticalhitdamage" value="500"/>
 		<attribute key="criticalhitchance" value="1000"/>
 		<attribute key="weight" value="2500"/>
 		<attribute key="imbuementslot" value="2">
+			<attribute key="life leech" value="3"/>
 			<attribute key="mana leech" value="3"/>
 			<attribute key="critical hit" value="3"/>
 			<attribute key="skillboost magic level" value="3"/>
