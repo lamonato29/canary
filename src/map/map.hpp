@@ -26,13 +26,25 @@ struct FindPathParams;
 class FrozenPathingConditionCall;
 
 /**
- * Map class.
- * Holds all the actual map-data
+ * @brief Map class.
+ *
+ * Holds all the actual map data and manages map operations.
+ * It inherits from MapCache to handle map sectors and caching.
  */
 class Map final : public MapCache {
 public:
+	/**
+	 * @brief Cleans the map of items that should be removed.
+	 *
+	 * @return The number of items removed.
+	 */
 	uint32_t clean() const;
 
+	/**
+	 * @brief Get the path to the map file.
+	 *
+	 * @return The path as a std::filesystem::path.
+	 */
 	std::filesystem::path getPath() const {
 		return path;
 	}
@@ -61,6 +73,9 @@ public:
 	 */
 	void loadMapCustom(const std::string &mapName, bool loadHouses, bool loadMonsters, bool loadNpcs, bool loadZones, int customMapIndex);
 
+	/**
+	 * @brief Loads house information from the map data.
+	 */
 	void loadHouseInfo();
 
 	/**
@@ -78,11 +93,27 @@ public:
 		return getTile(pos.x, pos.y, pos.z);
 	}
 
+	/**
+	 * @brief Refreshes the zones on a specific tile.
+	 *
+	 * @param x The x-coordinate.
+	 * @param y The y-coordinate.
+	 * @param z The z-coordinate.
+	 */
 	void refreshZones(uint16_t x, uint16_t y, uint8_t z);
 	void refreshZones(const Position &pos) {
 		refreshZones(pos.x, pos.y, pos.z);
 	}
 
+	/**
+	 * @brief Gets an existing tile or creates a new one if it doesn't exist.
+	 *
+	 * @param x The x-coordinate.
+	 * @param y The y-coordinate.
+	 * @param z The z-coordinate.
+	 * @param isDynamic Whether the tile is dynamically created.
+	 * @return A shared pointer to the Tile.
+	 */
 	std::shared_ptr<Tile> getOrCreateTile(uint16_t x, uint16_t y, uint8_t z, bool isDynamic = false);
 	std::shared_ptr<Tile> getOrCreateTile(const Position &pos, bool isDynamic = false) {
 		return getOrCreateTile(pos.x, pos.y, pos.z, isDynamic);
@@ -97,6 +128,13 @@ public:
 	 */
 	bool placeCreature(const Position &centerPos, const std::shared_ptr<Creature> &creature, bool extendedPos = false, bool forceLogin = false);
 
+	/**
+	 * @brief Moves a creature to a new tile.
+	 *
+	 * @param creature The creature to move.
+	 * @param newTile The destination tile.
+	 * @param forceTeleport Whether to force teleportation (ignoring some checks).
+	 */
 	void moveCreature(const std::shared_ptr<Creature> &creature, const std::shared_ptr<Tile> &newTile, bool forceTeleport = false);
 
 	/**
@@ -120,8 +158,24 @@ public:
 	bool isSightClear(const Position &fromPos, const Position &toPos, bool floorCheck);
 	bool checkSightLine(Position start, Position destination);
 
+	/**
+	 * @brief Checks if a creature can walk to a specific position.
+	 *
+	 * @param creature The creature attempting to walk.
+	 * @param pos The target position.
+	 * @return A shared pointer to the Tile if walkable, nullptr otherwise.
+	 */
 	std::shared_ptr<Tile> canWalkTo(const std::shared_ptr<Creature> &creature, const Position &pos);
 
+	/**
+	 * @brief Finds a path matching specific conditions.
+	 *
+	 * @param creature The creature finding the path.
+	 * @param dirList Vector to store the directions of the path.
+	 * @param pathCondition The condition for the path finding.
+	 * @param fpp Path finding parameters.
+	 * @return True if a path is found, false otherwise.
+	 */
 	bool getPathMatching(const std::shared_ptr<Creature> &creature, std::vector<Direction> &dirList, const FrozenPathingConditionCall &pathCondition, const FindPathParams &fpp);
 	bool getPathMatching(const std::shared_ptr<Creature> &creature, const Position &targetPos, std::vector<Direction> &dirList, const FrozenPathingConditionCall &pathCondition, const FindPathParams &fpp);
 	bool getPathMatchingCond(const std::shared_ptr<Creature> &creature, const Position &targetPos, std::vector<Direction> &dirList, const FrozenPathingConditionCall &pathCondition, const FindPathParams &fpp);

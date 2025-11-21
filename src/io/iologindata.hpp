@@ -18,11 +18,39 @@ struct VIPGroupEntry;
 
 using ItemBlockList = std::list<std::pair<int32_t, std::shared_ptr<Item>>>;
 
+/**
+ * @brief Handles database operations for player login, loading, and saving.
+ *
+ * This class interacts with the database to manage player data, including authentication,
+ * loading character information, saving progress, and managing VIP lists.
+ */
 class IOLoginData {
 public:
+	/**
+	 * @brief Authenticates a player login.
+	 *
+	 * @param accountDescriptor Name or email.
+	 * @param sessionOrPassword Password or session token.
+	 * @param characterName The character name to login.
+	 * @param accountId Output account ID.
+	 * @param oldProcotol Whether old protocol is used.
+	 * @param ip IP address of the client.
+	 * @return True if authentication successful, false otherwise.
+	 */
 	static bool gameWorldAuthentication(const std::string &accountDescriptor, const std::string &sessionOrPassword, std::string &characterName, uint32_t &accountId, bool oldProcotol, const uint32_t ip);
+
 	static uint8_t getAccountType(uint32_t accountId);
+
+	/**
+	 * @brief Loads player data by ID.
+	 *
+	 * @param player The player object to populate.
+	 * @param id The player ID.
+	 * @param disableIrrelevantInfo If true, skips loading data not needed for basic operations.
+	 * @return True if successful, false otherwise.
+	 */
 	static bool loadPlayerById(const std::shared_ptr<Player> &player, uint32_t id, bool disableIrrelevantInfo = true);
+
 	static bool loadPlayerByName(const std::shared_ptr<Player> &player, const std::string &name, bool disableIrrelevantInfo = true);
 	static bool loadPlayer(const std::shared_ptr<Player> &player, const std::shared_ptr<DBResult> &result, bool disableIrrelevantInfo = false);
 
@@ -40,6 +68,12 @@ public:
 	 */
 	static void loadOnlyDataForOnlinePlayer(const std::shared_ptr<Player> &player, const std::shared_ptr<DBResult> &result);
 
+	/**
+	 * @brief Saves the player data to the database.
+	 *
+	 * @param player The player to save.
+	 * @return True if successful, false otherwise.
+	 */
 	static bool savePlayer(const std::shared_ptr<Player> &player);
 
 	/**

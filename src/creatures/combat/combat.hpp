@@ -175,6 +175,12 @@ private:
 	bool hasExtArea = false;
 };
 
+/**
+ * @brief Handles combat logic, including damage calculation, effects, and area of effect.
+ *
+ * This class is responsible for executing combat actions between creatures,
+ * applying conditions, and managing combat parameters and callbacks.
+ */
 class Combat {
 public:
 	Combat() = default;

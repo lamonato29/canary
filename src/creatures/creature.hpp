@@ -68,6 +68,13 @@ private:
 // Defines the Base class for all creatures and base functions which
 // every creature has
 
+/**
+ * @brief Base class for all creatures (Players, Monsters, NPCs).
+ *
+ * Inherits from Thing (as it can be placed on the map) and SharedObject.
+ * Handles common logic such as health, mana, speed, movement, combat conditions,
+ * and interactions with the map and other creatures.
+ */
 class Creature : virtual public Thing, public SharedObject {
 protected:
 	Creature();

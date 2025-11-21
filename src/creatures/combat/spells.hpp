@@ -25,6 +25,12 @@ struct Position;
 
 using VocSpellMap = std::map<uint16_t, bool>;
 
+/**
+ * @brief Manages the collection of all spells in the game.
+ *
+ * Handles loading, storing, and retrieving spells (instant and runes).
+ * It also manages spell execution from player actions.
+ */
 class Spells {
 public:
 	Spells();
@@ -34,6 +40,11 @@ public:
 	Spells(const Spells &) = delete;
 	Spells &operator=(const Spells &) = delete;
 
+	/**
+	 * @brief Gets the singleton instance of Spells.
+	 *
+	 * @return Reference to the Spells instance.
+	 */
 	static Spells &getInstance();
 
 	std::shared_ptr<Spell> getSpellByName(const std::string &name);
@@ -72,12 +83,31 @@ constexpr auto g_spells = Spells::getInstance;
 
 using RuneSpellFunction [[maybe_unused]] = std::function<bool(const std::shared_ptr<RuneSpell> &spell, const std::shared_ptr<Player> &player, const Position &posTo)>;
 
+/**
+ * @brief Abstract base class for all spells.
+ *
+ * Defines the interface for casting spells and accessing script information.
+ */
 class BaseSpell {
 public:
 	constexpr BaseSpell() = default;
 	virtual ~BaseSpell() = default;
 
+	/**
+	 * @brief Casts the spell.
+	 *
+	 * @param creature The creature casting the spell.
+	 * @return True if the spell was cast successfully, false otherwise.
+	 */
 	virtual bool castSpell(const std::shared_ptr<Creature> &creature) = 0;
+
+	/**
+	 * @brief Casts the spell on a specific target.
+	 *
+	 * @param creature The creature casting the spell.
+	 * @param target The target creature.
+	 * @return True if the spell was cast successfully, false otherwise.
+	 */
 	virtual bool castSpell(const std::shared_ptr<Creature> &creature, const std::shared_ptr<Creature> &target) = 0;
 
 	LuaScriptInterface* getScriptInterface() const;

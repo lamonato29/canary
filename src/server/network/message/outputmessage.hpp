@@ -14,6 +14,12 @@
 
 class Protocol;
 
+/**
+ * @brief Represents an outgoing network message.
+ *
+ * Inherits from NetworkMessage and adds functionality for writing headers,
+ * managing output buffers, and appending messages.
+ */
 class OutputMessage : public NetworkMessage {
 public:
 	OutputMessage() = default;
@@ -23,20 +29,37 @@ public:
 	OutputMessage(const OutputMessage &) = delete;
 	OutputMessage &operator=(const OutputMessage &) = delete;
 
+	/**
+	 * @brief Gets the pointer to the output buffer.
+	 *
+	 * @return Pointer to the start of the output buffer.
+	 */
 	uint8_t* getOutputBuffer() {
 		return buffer.data() + outputBufferStart;
 	}
 
+	/**
+	 * @brief Writes padding bytes and header.
+	 */
 	void writePaddingAmount() {
 		uint8_t paddingAmount = 8 - (info.length % 8) - 1;
 		addPaddingBytes(paddingAmount);
 		add_header(paddingAmount);
 	}
 
+	/**
+	 * @brief Writes the message length header.
+	 */
 	void writeMessageLength() {
 		add_header(static_cast<uint16_t>((info.length - 4) / 8));
 	}
 
+	/**
+	 * @brief Adds cryptographic headers to the message.
+	 *
+	 * @param addChecksum Whether to add a checksum.
+	 * @param checksum The checksum value.
+	 */
 	void addCryptoHeader(bool addChecksum, uint32_t checksum) {
 		if (addChecksum) {
 			add_header(checksum);
@@ -45,6 +68,11 @@ public:
 		writeMessageLength();
 	}
 
+	/**
+	 * @brief Appends another NetworkMessage to this one.
+	 *
+	 * @param msg The message to append.
+	 */
 	void append(const NetworkMessage &msg) {
 		auto msgLen = msg.getLength();
 		std::span<const unsigned char> sourceSpan(msg.getBuffer() + INITIAL_BUFFER_POSITION, msgLen);
@@ -54,6 +82,11 @@ public:
 		info.position += msgLen;
 	}
 
+	/**
+	 * @brief Appends another OutputMessage (via pointer) to this one.
+	 *
+	 * @param msg Pointer to the message to append.
+	 */
 	void append(const OutputMessage_ptr &msg) {
 		auto msgLen = msg->getLength();
 		std::span<const unsigned char> sourceSpan(msg->getBuffer() + INITIAL_BUFFER_POSITION, msgLen);
@@ -91,6 +124,11 @@ private:
 	MsgSize_t outputBufferStart = INITIAL_BUFFER_POSITION;
 };
 
+/**
+ * @brief Manages a pool of OutputMessages and auto-sending protocols.
+ *
+ * This singleton class handles the buffering and batched sending of output messages.
+ */
 class OutputMessagePool {
 public:
 	OutputMessagePool() = default;
@@ -99,14 +137,44 @@ public:
 	OutputMessagePool(const OutputMessagePool &) = delete;
 	OutputMessagePool &operator=(const OutputMessagePool &) = delete;
 
+	/**
+	 * @brief Get the singleton instance of OutputMessagePool.
+	 *
+	 * @return Reference to the OutputMessagePool instance.
+	 */
 	static OutputMessagePool &getInstance();
 
+	/**
+	 * @brief Sends all buffered messages for registered protocols.
+	 */
 	void sendAll();
+
+	/**
+	 * @brief Schedules `sendAll` to be executed later (e.g., next IO cycle).
+	 */
 	void scheduleSendAll();
 
+	/**
+	 * @brief Obtains a fresh OutputMessage from the pool (or creates new).
+	 *
+	 * @return Shared pointer to an OutputMessage.
+	 */
 	static OutputMessage_ptr getOutputMessage();
 
+	/**
+	 * @brief Adds a protocol to the auto-send list.
+	 *
+	 * Protocols in this list will have their buffered messages flushed periodically.
+	 *
+	 * @param protocol The protocol to add.
+	 */
 	void addProtocolToAutosend(const Protocol_ptr &protocol);
+
+	/**
+	 * @brief Removes a protocol from the auto-send list.
+	 *
+	 * @param protocol The protocol to remove.
+	 */
 	void removeProtocolFromAutosend(const Protocol_ptr &protocol);
 
 private:

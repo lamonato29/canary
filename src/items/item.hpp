@@ -29,9 +29,23 @@ class Imbuement;
 class Item;
 class Cylinder;
 
-// This class ItemProperties that serves as an interface to access and modify attributes of an item. The item's attributes are stored in an instance of ItemAttribute. The class ItemProperties has methods to get and set integer and string attributes, check if an attribute exists, remove an attribute, get the underlying attribute bits, and get a vector of attributes. It also has methods to get and set custom attributes, which are stored in a std::map<std::string, CustomAttribute, std::less<>>. The class has a data member attributePtr of type std::unique_ptr<ItemAttribute> that stores a pointer to the item's attributes methods.
+/**
+ * @brief Interface to access and modify attributes of an item.
+ *
+ * The item's attributes are stored in an instance of ItemAttribute.
+ * The class ItemProperties has methods to get and set integer and string attributes,
+ * check if an attribute exists, remove an attribute, get the underlying attribute bits,
+ * and get a vector of attributes. It also has methods to get and set custom attributes.
+ */
 class ItemProperties {
 public:
+	/**
+	 * @brief Get an attribute value by type.
+	 *
+	 * @tparam T The type of the return value (std::string or integer type).
+	 * @param type The attribute type enum.
+	 * @return The attribute value.
+	 */
 	template <typename T>
 	T getAttribute(ItemAttribute_t type) const {
 		if constexpr (std::is_same_v<T, std::string>) {
@@ -47,6 +61,12 @@ public:
 		return {};
 	}
 
+	/**
+	 * @brief Check if the item has a specific attribute.
+	 *
+	 * @param type The attribute type to check.
+	 * @return True if the attribute exists, false otherwise.
+	 */
 	bool hasAttribute(ItemAttribute_t type) const {
 		if (!attributePtr) {
 			return false;
@@ -54,27 +74,65 @@ public:
 
 		return attributePtr->hasAttribute(type);
 	}
+
+	/**
+	 * @brief Remove an attribute from the item.
+	 *
+	 * @param type The attribute type to remove.
+	 */
 	void removeAttribute(ItemAttribute_t type) const {
 		if (attributePtr) {
 			attributePtr->removeAttribute(type);
 		}
 	}
 
+	/**
+	 * @brief Set an attribute value.
+	 *
+	 * @tparam GenericAttribute The type of the attribute value.
+	 * @param type The attribute type to set.
+	 * @param genericAttribute The value to set.
+	 */
 	template <typename GenericAttribute>
 	void setAttribute(ItemAttribute_t type, GenericAttribute genericAttribute) {
 		initAttributePtr()->setAttribute(type, genericAttribute);
 	}
 
+	/**
+	 * @brief Check if an attribute is of integer type.
+	 *
+	 * @param type The attribute type.
+	 * @return True if it is an integer attribute, false otherwise.
+	 */
 	bool isAttributeInteger(ItemAttribute_t type) const {
 		return initAttributePtr()->isAttributeInteger(type);
 	}
 
+	/**
+	 * @brief Check if an attribute is of string type.
+	 *
+	 * @param type The attribute type.
+	 * @return True if it is a string attribute, false otherwise.
+	 */
 	bool isAttributeString(ItemAttribute_t type) const {
 		return initAttributePtr()->isAttributeString(type);
 	}
 
 	// Custom Attributes
+
+	/**
+	 * @brief Get all custom attributes.
+	 *
+	 * @return A map of custom attributes.
+	 */
 	const std::map<std::string, CustomAttribute, std::less<>> &getCustomAttributeMap() const;
+
+	/**
+	 * @brief Get a specific custom attribute by name.
+	 *
+	 * @param attributeName The name of the custom attribute.
+	 * @return A pointer to the CustomAttribute, or nullptr if not found.
+	 */
 	const CustomAttribute* getCustomAttribute(const std::string &attributeName) const {
 		if (!attributePtr) {
 			return nullptr;
@@ -83,19 +141,43 @@ public:
 		return attributePtr->getCustomAttribute(attributeName);
 	}
 
+	/**
+	 * @brief Set a custom attribute value.
+	 *
+	 * @tparam GenericType The type of the value.
+	 * @param key The name of the custom attribute.
+	 * @param value The value to set.
+	 */
 	template <typename GenericType>
 	void setCustomAttribute(const std::string &key, GenericType value) {
 		initAttributePtr()->setCustomAttribute(key, value);
 	}
 
+	/**
+	 * @brief Add a custom attribute object.
+	 *
+	 * @param key The name of the custom attribute.
+	 * @param customAttribute The CustomAttribute object.
+	 */
 	void addCustomAttribute(const std::string &key, const CustomAttribute &customAttribute) {
 		initAttributePtr()->addCustomAttribute(key, customAttribute);
 	}
 
+	/**
+	 * @brief Check if there are any custom attributes.
+	 *
+	 * @return True if custom attributes exist, false otherwise.
+	 */
 	bool hasCustomAttribute() const {
 		return !getCustomAttributeMap().empty();
 	}
 
+	/**
+	 * @brief Remove a custom attribute by name.
+	 *
+	 * @param attributeName The name of the custom attribute to remove.
+	 * @return True if removed successfully, false if not found or no attributes exist.
+	 */
 	bool removeCustomAttribute(const std::string &attributeName) const {
 		if (!attributePtr) {
 			return false;
@@ -202,6 +284,10 @@ private:
 	friend class Item;
 };
 
+/**
+ * @brief Represents an item in the game.
+ * Inherits from Thing, ItemProperties, and SharedObject.
+ */
 class Item : virtual public Thing, public ItemProperties, public SharedObject {
 public:
 	// Create a new item batch, it can use custom charges/count and wrappable

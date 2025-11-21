@@ -25,16 +25,38 @@ enum Direction : uint8_t {
 	DIRECTION_NONE = 8,
 };
 
+/**
+ * @brief Represents a coordinate in the 3D game world.
+ */
 struct Position {
 	constexpr Position() = default;
 	constexpr Position(uint16_t initX, uint16_t initY, uint8_t initZ) :
 		x(initX), y(initY), z(initZ) { }
 
+	/**
+	 * @brief Checks if two positions are within a certain range in X and Y dimensions.
+	 *
+	 * @tparam deltax Maximum difference in X.
+	 * @tparam deltay Maximum difference in Y.
+	 * @param p1 First position.
+	 * @param p2 Second position.
+	 * @return True if they are in range, false otherwise.
+	 */
 	template <int_fast32_t deltax, int_fast32_t deltay>
 	static bool areInRange(const Position &p1, const Position &p2) {
 		return Position::getDistanceX(p1, p2) <= deltax && Position::getDistanceY(p1, p2) <= deltay;
 	}
 
+	/**
+	 * @brief Checks if two positions are within a certain range in X, Y, and Z dimensions.
+	 *
+	 * @tparam deltax Maximum difference in X.
+	 * @tparam deltay Maximum difference in Y.
+	 * @tparam deltaz Maximum difference in Z.
+	 * @param p1 First position.
+	 * @param p2 Second position.
+	 * @return True if they are in range, false otherwise.
+	 */
 	template <int_fast32_t deltax, int_fast32_t deltay, int_fast16_t deltaz>
 	static bool areInRange(const Position &p1, const Position &p2) {
 		return Position::getDistanceX(p1, p2) <= deltax && Position::getDistanceY(p1, p2) <= deltay && Position::getDistanceZ(p1, p2) <= deltaz;

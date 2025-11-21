@@ -18,6 +18,12 @@ class Player;
 struct Position;
 class RSA;
 
+/**
+ * @brief Handles reading from and writing to network buffers.
+ *
+ * This class provides methods for serializing and deserializing primitive types,
+ * strings, and game-specific structures (like Position) for network transmission.
+ */
 class NetworkMessage {
 public:
 	virtual ~NetworkMessage() = default;
@@ -29,17 +35,44 @@ public:
 	// 1 byte for padding message size
 	static constexpr MsgSize_t INITIAL_BUFFER_POSITION = 7;
 
+	/**
+	 * @brief Decodes the message header.
+	 *
+	 * @return The size of the message payload.
+	 */
 	int32_t decodeHeader();
 
+	/**
+	 * @brief Resets the message buffer state.
+	 */
 	void reset() {
 		info = {};
 	}
 
 	// simply read functions for incoming message
+
+	/**
+	 * @brief Reads a byte from the buffer.
+	 *
+	 * @param suppresLog If true, suppresses error logging on read failure.
+	 * @param location Source location for debugging.
+	 * @return The byte read from the buffer.
+	 */
 	uint8_t getByte(bool suppresLog = false, const std::source_location &location = std::source_location::current());
 
+	/**
+	 * @brief Gets the previous byte read.
+	 *
+	 * @return The byte at the position preceding the current read position.
+	 */
 	uint8_t getPreviousByte();
 
+	/**
+	 * @brief Reads a value of type T from the buffer.
+	 *
+	 * @tparam T The type of value to read.
+	 * @return The value read.
+	 */
 	template <typename T>
 	T get() {
 		static_assert(!std::is_same_v<T, double>, "Error: get<double>() is not allowed. Use getDouble() instead.");
@@ -59,15 +92,42 @@ public:
 		return std::bit_cast<T>(tempBuffer);
 	}
 
+	/**
+	 * @brief Reads a string from the buffer.
+	 *
+	 * @param stringLen The length of the string to read (if 0, reads a 2-byte length prefix).
+	 * @param location Source location for debugging.
+	 * @return The string read from the buffer.
+	 */
 	std::string getString(uint16_t stringLen = 0, const std::source_location &location = std::source_location::current());
+
+	/**
+	 * @brief Reads a Position object from the buffer.
+	 *
+	 * @return The Position object.
+	 */
 	Position getPosition();
 
 	// skips count unknown/unused bytes in an incoming message
 	void skipBytes(int16_t count);
 
 	// simply write functions for outgoing message
+
+	/**
+	 * @brief Writes a byte to the buffer.
+	 *
+	 * @param value The byte value to write.
+	 * @param location Source location for debugging.
+	 */
 	void addByte(uint8_t value, std::source_location location = std::source_location::current());
 
+	/**
+	 * @brief Writes a value of type T to the buffer.
+	 *
+	 * @tparam T The type of value to write.
+	 * @param value The value to write.
+	 * @param location Source location for debugging.
+	 */
 	template <typename T>
 	void add(T value, std::source_location location = std::source_location::current()) {
 		static_assert(!std::is_same_v<T, double>, "Error: get<double>() is not allowed. Use addDouble() instead.");
@@ -103,7 +163,19 @@ public:
 		info.length += sizeof(T);
 	}
 
+	/**
+	 * @brief Writes raw bytes to the buffer.
+	 *
+	 * @param bytes Pointer to the byte array.
+	 * @param size Number of bytes to write.
+	 */
 	void addBytes(const char* bytes, size_t size);
+
+	/**
+	 * @brief Adds padding bytes to the buffer.
+	 *
+	 * @param n Number of padding bytes to add.
+	 */
 	void addPaddingBytes(size_t n);
 
 	/**
@@ -139,10 +211,27 @@ public:
 	 */
 	void addString(const std::string &value, const std::source_location &location = std::source_location::current(), const std::string &function = "");
 
+	/**
+	 * @brief Adds a double value to the buffer with specified precision.
+	 *
+	 * @param value The double value.
+	 * @param precision The precision (number of decimal places).
+	 */
 	void addDouble(double value, uint8_t precision = 4);
+
+	/**
+	 * @brief Reads a double value from the buffer.
+	 *
+	 * @return The double value read.
+	 */
 	double getDouble();
 
 	// write functions for complex types
+	/**
+	 * @brief Adds a position to the buffer.
+	 *
+	 * @param pos The position to add.
+	 */
 	void addPosition(const Position &pos);
 
 	MsgSize_t getLength() const;

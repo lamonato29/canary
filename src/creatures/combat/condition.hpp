@@ -19,17 +19,59 @@ class Player;
 class PropStream;
 class PropWriteStream;
 
+/**
+ * @brief Base class for all conditions (status effects) applied to creatures.
+ *
+ * Conditions can modify creature properties (speed, skills, stats), deal damage,
+ * apply outfits, or trigger periodic effects. They are managed by the ConditionManager.
+ */
 class Condition : public SharedObject {
 public:
 	Condition() = default;
 	Condition(ConditionId_t initId, ConditionType_t initType, int32_t initTicks, bool initBuff = false, uint32_t initSubId = 0, bool isPersistent = false);
 	virtual ~Condition() = default;
 
+	/**
+	 * @brief Starts the condition on a creature.
+	 *
+	 * @param creature The creature to apply the condition to.
+	 * @return True if the condition was successfully started, false otherwise.
+	 */
 	virtual bool startCondition(std::shared_ptr<Creature> creature);
+
+	/**
+	 * @brief Executes the condition logic.
+	 *
+	 * Called periodically by the server.
+	 *
+	 * @param creature The creature affected by the condition.
+	 * @param interval The time elapsed since the last execution.
+	 * @return True if the condition should continue, false if it should end.
+	 */
 	virtual bool executeCondition(const std::shared_ptr<Creature> &creature, int32_t interval);
+
+	/**
+	 * @brief Ends the condition on a creature.
+	 *
+	 * @param creature The creature.
+	 */
 	virtual void endCondition(std::shared_ptr<Creature> creature) = 0;
+
+	/**
+	 * @brief Merges or replaces this condition with another one.
+	 *
+	 * @param creature The creature.
+	 * @param condition The new condition being added.
+	 */
 	virtual void addCondition(std::shared_ptr<Creature> creature, std::shared_ptr<Condition> condition) = 0;
+
+	/**
+	 * @brief Gets the icons associated with this condition for the client.
+	 *
+	 * @return A set of PlayerIcon enums.
+	 */
 	virtual std::unordered_set<PlayerIcon> getIcons() const;
+
 	ConditionId_t getId() const;
 	uint32_t getSubId() const;
 

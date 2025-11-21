@@ -11,6 +11,12 @@
 
 class Dispatcher;
 
+/**
+ * @brief Represents a scheduled or dispatched task.
+ *
+ * Encapsulates a function to be executed, its context, timing information (delay, expiration),
+ * and lifecycle state (canceled, cycled).
+ */
 class Task {
 public:
 	Task(uint32_t expiresAfterMs, std::function<void(void)> &&f, std::string_view context);

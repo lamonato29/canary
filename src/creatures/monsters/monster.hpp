@@ -20,6 +20,11 @@ class SpawnMonster;
 
 using CreatureVector = std::vector<std::shared_ptr<Creature>>;
 
+/**
+ * @brief Represents a monster in the game.
+ *
+ * Monsters are creatures controlled by the AI.
+ */
 class Monster final : public Creature {
 public:
 	static std::shared_ptr<Monster> createMonster(const std::string &name);

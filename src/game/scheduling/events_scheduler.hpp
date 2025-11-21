@@ -26,6 +26,12 @@ struct EventRates {
 	uint16_t skillrate = 100;
 };
 
+/**
+ * @brief Manages scheduled game events and global server rates.
+ *
+ * This class handles the loading of event schedules from XML and allows dynamic
+ * modification of global rates for experience, loot, boss loot, spawn, and skills.
+ */
 class EventsScheduler {
 public:
 	EventsScheduler() = default;
@@ -34,11 +40,21 @@ public:
 	EventsScheduler(const EventsScheduler &) = delete;
 	EventsScheduler &operator=(const EventsScheduler &) = delete;
 
+	/**
+	 * @brief Gets the singleton instance of EventsScheduler.
+	 *
+	 * @return Reference to the EventsScheduler instance.
+	 */
 	static EventsScheduler &getInstance() {
 		return inject<EventsScheduler>();
 	}
 
 	// Event schedule xml load
+	/**
+	 * @brief Loads scheduled events from the XML configuration file.
+	 *
+	 * @return True if loading was successful, false otherwise.
+	 */
 	bool loadScheduleEventFromXml();
 
 	// Event schedule

@@ -86,6 +86,13 @@ struct HighscoreCacheEntry {
 	std::chrono::time_point<std::chrono::system_clock> timestamp;
 };
 
+/**
+ * @brief The Game class serves as the central manager for the game state.
+ *
+ * It implements the Singleton pattern to ensure only one instance exists.
+ * This class manages creatures (players, monsters, NPCs), items, map loading,
+ * game events, world time/light, and various game systems like guilds, housing, and highscores.
+ */
 class Game {
 public:
 	Game();
@@ -95,14 +102,39 @@ public:
 	Game(const Game &) = delete;
 	Game &operator=(const Game &) = delete;
 
+	/**
+	 * @brief Get the singleton instance of the Game class.
+	 * @return Reference to the Game instance.
+	 */
 	static Game &getInstance();
 
+	/**
+	 * @brief Clears and resets the monster list.
+	 */
 	void resetMonsters() const;
+
+	/**
+	 * @brief Clears and resets the NPC list.
+	 */
 	void resetNpcs() const;
 
+	/**
+	 * @brief Loads the boosted creature of the day.
+	 */
 	void loadBoostedCreature();
+
+	/**
+	 * @brief Starts the game services and loops.
+	 * @param manager Pointer to the ServiceManager.
+	 */
 	void start(ServiceManager* manager);
 
+	/**
+	 * @brief Force removes a condition from a creature.
+	 * @param creatureId The ID of the creature.
+	 * @param type The condition type.
+	 * @param conditionId The specific condition ID.
+	 */
 	void forceRemoveCondition(uint32_t creatureId, ConditionType_t type, ConditionId_t conditionId);
 
 	void logCyclopediaStats();

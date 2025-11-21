@@ -93,6 +93,12 @@ struct Abilities {
 
 class ConditionDamage;
 
+/**
+ * @brief Represents the type definition of an item.
+ *
+ * Contains all static information about an item type, such as its ID, name,
+ * weight, attributes, and other properties defined in items.xml or other data sources.
+ */
 class ItemType {
 public:
 	ItemType() = default;
@@ -104,6 +110,10 @@ public:
 	ItemType(ItemType &&other) noexcept = default;
 	ItemType &operator=(ItemType &&other) = default;
 
+	/**
+	 * @brief Checks if using this item type triggers exhaustion.
+	 * @return True if it triggers exhaustion, false otherwise.
+	 */
 	bool triggerExhaustion() const;
 
 	bool isGroundTile() const {
@@ -374,6 +384,12 @@ public:
 	bool m_isMagicShieldPotion = false;
 };
 
+/**
+ * @brief Manages the collection of all ItemTypes.
+ *
+ * This class is responsible for loading item definitions from files,
+ * providing access to ItemTypes by ID or name, and managing inventory lists.
+ */
 class Items {
 public:
 	using NameMap = std::unordered_multimap<std::string, uint16_t>;
@@ -385,15 +401,43 @@ public:
 	Items(const Items &) = delete;
 	Items &operator=(const Items &) = delete;
 
+	/**
+	 * @brief Reloads item definitions.
+	 * @return True if successful, false otherwise.
+	 */
 	bool reload();
+
+	/**
+	 * @brief Clears all item definitions.
+	 */
 	void clear();
 
+	/**
+	 * @brief Loads item definitions from Protobuf.
+	 */
 	void loadFromProtobuf();
 
+	/**
+	 * @brief Get item type by ID.
+	 * @param id The item ID.
+	 * @return The ItemType reference.
+	 */
 	const ItemType &operator[](size_t id) const {
 		return getItemType(id);
 	}
+
+	/**
+	 * @brief Get item type by ID (const).
+	 * @param id The item ID.
+	 * @return The ItemType reference.
+	 */
 	const ItemType &getItemType(size_t id) const;
+
+	/**
+	 * @brief Get item type by ID.
+	 * @param id The item ID.
+	 * @return The ItemType reference.
+	 */
 	ItemType &getItemType(size_t id);
 
 	/**
@@ -405,22 +449,58 @@ public:
 	 */
 	bool hasItemType(size_t hasId) const;
 
+	/**
+	 * @brief Get item ID by name.
+	 * @param name The item name.
+	 * @return The item ID, or 0 if not found.
+	 */
 	uint16_t getItemIdByName(const std::string &name);
 
+	/**
+	 * @brief Get loot type from string value.
+	 * @param strValue The string value.
+	 * @return The ItemTypes_t value.
+	 */
 	ItemTypes_t getLootType(const std::string &strValue) const;
 
+	/**
+	 * @brief Loads item definitions from XML.
+	 * @return True if successful, false otherwise.
+	 */
 	bool loadFromXml();
+
+	/**
+	 * @brief Parses an item node from XML.
+	 * @param itemNode The XML node.
+	 * @param id The item ID.
+	 */
 	void parseItemNode(const pugi::xml_node &itemNode, uint16_t id);
 
+	/**
+	 * @brief Builds the inventory list.
+	 */
 	void buildInventoryList();
+
+	/**
+	 * @brief Get the inventory list.
+	 * @return The inventory vector.
+	 */
 	const InventoryVector &getInventory() const {
 		return inventory;
 	}
 
+	/**
+	 * @brief Get the number of item types.
+	 * @return The size of the item types collection.
+	 */
 	size_t size() const {
 		return items.size();
 	}
 
+	/**
+	 * @brief Get the items vector.
+	 * @return The vector of ItemType.
+	 */
 	std::vector<ItemType> &getItems() {
 		return items;
 	}

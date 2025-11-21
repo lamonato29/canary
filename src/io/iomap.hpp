@@ -20,8 +20,20 @@
 #include "creatures/npcs/spawns/spawn_npc.hpp"
 #include "game/zones/zone.hpp"
 
+/**
+ * @brief Handles loading of map data from files.
+ *
+ * This class provides static methods to load map structure (OTBM), monsters, NPCs,
+ * zones, and houses from their respective XML or binary files.
+ */
 class IOMap {
 public:
+	/**
+	 * @brief Loads the map data from the OTBM file.
+	 *
+	 * @param map Pointer to the Map instance.
+	 * @param pos Optional offset position for loading the map.
+	 */
 	static void loadMap(Map* map, const Position &pos = Position());
 
 	/**

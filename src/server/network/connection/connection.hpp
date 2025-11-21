@@ -32,20 +32,54 @@ using ServicePort_ptr = std::shared_ptr<ServicePort>;
 using ConstServicePort_ptr = std::shared_ptr<const ServicePort>;
 class NetworkMessage;
 
+/**
+ * @brief Manages active network connections.
+ *
+ * Keeps track of all active Connection objects and ensures they are properly
+ * closed when the server shuts down or when connections are released.
+ */
 class ConnectionManager {
 public:
 	ConnectionManager() = default;
 
+	/**
+	 * @brief Gets the singleton instance of ConnectionManager.
+	 *
+	 * @return Reference to the ConnectionManager instance.
+	 */
 	static ConnectionManager &getInstance();
 
+	/**
+	 * @brief Creates a new connection.
+	 *
+	 * @param io_service The ASIO IO service.
+	 * @param servicePort The service port associated with this connection.
+	 * @return Shared pointer to the created Connection.
+	 */
 	Connection_ptr createConnection(asio::io_service &io_service, const ConstServicePort_ptr &servicePort);
+
+	/**
+	 * @brief Releases (removes) a connection from the manager.
+	 *
+	 * @param connection The connection to release.
+	 */
 	void releaseConnection(const Connection_ptr &connection);
+
+	/**
+	 * @brief Closes all active connections.
+	 */
 	void closeAll();
 
 private:
 	phmap::parallel_flat_hash_set_m<Connection_ptr> connections;
 };
 
+/**
+ * @brief Represents a TCP connection to a client.
+ *
+ * Handles low-level socket operations, data reading/writing, timeouts, and
+ * interaction with the associated Protocol instance.
+ */
 class Connection : public std::enable_shared_from_this<Connection> {
 public:
 	// Constructor
@@ -59,15 +93,36 @@ public:
 	Connection(const Connection &) = delete;
 	Connection &operator=(const Connection &) = delete;
 
+	/**
+	 * @brief Closes the connection.
+	 *
+	 * @param force If true, closes the socket immediately.
+	 */
 	void close(bool force = false);
+
 	// Used by protocols that require server to send first
 	void accept(Protocol_ptr protocolPtr);
 	void acceptInternal(bool toggleParseHeader = true);
 
+	/**
+	 * @brief Resumes reading from the socket.
+	 *
+	 * Typically called after a protocol operation completes to continue processing.
+	 */
 	void resumeWork();
 
+	/**
+	 * @brief Sends a message to the client.
+	 *
+	 * @param outputMessage The message to send.
+	 */
 	void send(const OutputMessage_ptr &outputMessage);
 
+	/**
+	 * @brief Gets the remote IP address.
+	 *
+	 * @return The IP address as a 32-bit integer.
+	 */
 	uint32_t getIP();
 
 private:

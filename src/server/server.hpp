@@ -80,6 +80,12 @@ private:
 	bool pendingStart = false;
 };
 
+/**
+ * @brief Manages network services and acceptors.
+ *
+ * Handles the lifecycle of network services, including starting, stopping,
+ * and adding protocols to ports.
+ */
 class ServiceManager {
 public:
 	ServiceManager() = default;
@@ -89,12 +95,31 @@ public:
 	ServiceManager(const ServiceManager &) = delete;
 	ServiceManager &operator=(const ServiceManager &) = delete;
 
+	/**
+	 * @brief Runs the service manager, starting the IO service.
+	 */
 	void run();
+
+	/**
+	 * @brief Stops the service manager and all services.
+	 */
 	void stop();
 
+	/**
+	 * @brief Adds a protocol service to a specific port.
+	 *
+	 * @tparam ProtocolType The protocol class to add.
+	 * @param port The port number to listen on.
+	 * @return True if the service was successfully added, false otherwise.
+	 */
 	template <typename ProtocolType>
 	bool add(uint16_t port);
 
+	/**
+	 * @brief Checks if the service manager is running.
+	 *
+	 * @return True if running, false otherwise.
+	 */
 	bool is_running() const {
 		return acceptors.empty() == false;
 	}

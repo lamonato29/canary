@@ -26,6 +26,11 @@ class ItemType;
 using CreatureVector = std::vector<std::shared_ptr<Creature>>;
 using ItemVector = std::vector<std::shared_ptr<Item>>;
 
+/**
+ * @brief Helper class for managing a vector of items on a tile.
+ *
+ * Differentiates between "down" items (ground, borders) and "top" items (movable items, creatures).
+ */
 class TileItemVector : private ItemVector {
 public:
 	using ItemVector::at;
@@ -99,6 +104,12 @@ private:
 	uint32_t downItemCount = 0;
 };
 
+/**
+ * @brief Represents a tile on the map.
+ *
+ * A tile is a specific coordinate in the game world that can hold items, creatures, and special zones.
+ * It inherits from Cylinder to allow containment of items and creatures.
+ */
 class Tile : public Cylinder, public SharedObject {
 public:
 	static const std::shared_ptr<Tile> &nullptr_tile;

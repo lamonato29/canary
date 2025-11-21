@@ -20,6 +20,11 @@
 class DBResult;
 using DBResult_ptr = std::shared_ptr<DBResult>;
 
+/**
+ * @brief Singleton class for managing the MySQL database connection and operations.
+ *
+ * Handles connection, queries, transactions, and backups.
+ */
 class Database {
 public:
 	static const size_t MAX_QUERY_SIZE = 8 * 1024 * 1024; // 8 Mb -- half the default MySQL max_allowed_packet size
@@ -31,10 +36,31 @@ public:
 	Database(const Database &) = delete;
 	Database &operator=(const Database &) = delete;
 
+	/**
+	 * @brief Get the singleton instance of the Database class.
+	 *
+	 * @return Reference to the Database instance.
+	 */
 	static Database &getInstance();
 
+	/**
+	 * @brief Connect to the database using configuration values.
+	 *
+	 * @return True if connection was successful, false otherwise.
+	 */
 	bool connect();
 
+	/**
+	 * @brief Connect to the database with specific credentials.
+	 *
+	 * @param host Database host.
+	 * @param user Database user.
+	 * @param password Database password.
+	 * @param database Database name.
+	 * @param port Database port.
+	 * @param sock Unix socket path (optional).
+	 * @return True if connection was successful, false otherwise.
+	 */
 	bool connect(const std::string* host, const std::string* user, const std::string* password, const std::string* database, uint32_t port, const std::string* sock);
 
 	/**

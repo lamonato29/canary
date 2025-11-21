@@ -72,9 +72,11 @@ private:
 };
 
 /**
- * Dispatcher allow you to dispatch a task async to be executed
- * in the dispatching thread. You can dispatch with an expiration
- * time, after which the task will be ignored.
+ * @brief Manages task dispatching and scheduling.
+ *
+ * Allows tasks to be executed asynchronously, scheduled for later execution,
+ * or executed periodically (cycled). It manages different task groups (e.g., Walk, GenericParallel)
+ * and integrates with the thread pool.
  */
 class Dispatcher {
 public:
@@ -94,19 +96,63 @@ public:
 
 	static Dispatcher &getInstance();
 
+	/**
+	 * @brief Adds a task to be executed.
+	 *
+	 * @param f The function to execute.
+	 * @param context Context name for debugging/tracking.
+	 * @param expiresAfterMs Optional expiration time in milliseconds.
+	 */
 	void addEvent(std::function<void(void)> &&f, std::string_view context, uint32_t expiresAfterMs = 0);
+
+	/**
+	 * @brief Adds a walk task to be executed.
+	 *
+	 * @param f The walk function.
+	 * @param expiresAfterMs Optional expiration time.
+	 */
 	void addWalkEvent(std::function<void(void)> &&f, uint32_t expiresAfterMs = 0); // No need context name
 
+	/**
+	 * @brief Schedules a task to run repeatedly (cyclic).
+	 *
+	 * @param delay Delay in milliseconds.
+	 * @param f The function to execute.
+	 * @param context Context name.
+	 * @return The scheduled task ID.
+	 */
 	uint64_t cycleEvent(uint32_t delay, std::function<void(void)> &&f, std::string_view context) {
 		return scheduleEvent(delay, std::move(f), context, true);
 	}
 
+	/**
+	 * @brief Schedules a task using a Task object.
+	 *
+	 * @param task The task to schedule.
+	 * @return The scheduled task ID.
+	 */
 	uint64_t scheduleEvent(const std::shared_ptr<Task> &task);
+
+	/**
+	 * @brief Schedules a task to run once after a delay.
+	 *
+	 * @param delay Delay in milliseconds.
+	 * @param f The function to execute.
+	 * @param context Context name.
+	 * @return The scheduled task ID.
+	 */
 	uint64_t scheduleEvent(uint32_t delay, std::function<void(void)> &&f, std::string_view context) {
 		return scheduleEvent(delay, std::move(f), context, false);
 	}
 
+	/**
+	 * @brief Dispatches a task asynchronously to a thread group.
+	 *
+	 * @param f The function to execute.
+	 * @param group The task group.
+	 */
 	void asyncEvent(std::function<void(void)> &&f, TaskGroup group = TaskGroup::GenericParallel);
+
 	void asyncWait(size_t size, std::function<void(size_t i)> &&f);
 
 	uint64_t asyncCycleEvent(uint32_t delay, std::function<void(void)> &&f, TaskGroup group = TaskGroup::GenericParallel) {

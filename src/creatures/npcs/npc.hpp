@@ -20,6 +20,11 @@ class Creature;
 class Game;
 class SpawnNpc;
 
+/**
+ * @brief Represents a Non-Player Character (NPC).
+ *
+ * NPCs can interact with players, trade items, and perform actions.
+ */
 class Npc final : public Creature {
 public:
 	static std::shared_ptr<Npc> createNpc(const std::string &name);

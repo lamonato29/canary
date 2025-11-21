@@ -21,6 +21,9 @@ class DepotLocker;
 class RewardChest;
 class Reward;
 
+/**
+ * @brief Iterator for traversing items within a container and its sub-containers.
+ */
 class ContainerIterator {
 public:
 	/**
@@ -132,6 +135,11 @@ private:
 	friend class Container;
 };
 
+/**
+ * @brief Represents a container item that can hold other items.
+ *
+ * Inherits from Item and Cylinder. Can handle adding, removing, and querying items.
+ */
 class Container : public Item, public Cylinder {
 public:
 	explicit Container(uint16_t type);

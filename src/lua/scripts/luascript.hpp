@@ -12,6 +12,11 @@
 #include "lua/functions/lua_functions_loader.hpp"
 #include "lua/scripts/script_environment.hpp"
 
+/**
+ * @brief Interface for interacting with the Lua scripting environment.
+ *
+ * Manages the Lua state, loads scripts, and handles function calls.
+ */
 class LuaScriptInterface : public Lua {
 public:
 	explicit LuaScriptInterface(std::string interfaceName);
@@ -21,9 +26,27 @@ public:
 	LuaScriptInterface(const LuaScriptInterface &) = delete;
 	LuaScriptInterface &operator=(const LuaScriptInterface &) = delete;
 
+	/**
+	 * @brief Initializes the Lua state.
+	 *
+	 * @return True if initialization was successful, false otherwise.
+	 */
 	virtual bool initState();
+
+	/**
+	 * @brief Re-initializes the Lua state.
+	 *
+	 * @return True if re-initialization was successful, false otherwise.
+	 */
 	virtual bool reInitState();
 
+	/**
+	 * @brief Loads a Lua script file.
+	 *
+	 * @param file The path to the script file.
+	 * @param scriptName The name of the script (for identification).
+	 * @return The ID of the loaded script, or -1 on failure.
+	 */
 	int32_t loadFile(const std::string &file, const std::string &scriptName);
 
 	const std::string &getFileById(int32_t scriptId);

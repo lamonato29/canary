@@ -133,6 +133,13 @@ static constexpr uint16_t PLAYER_MAX_SPEED = std::numeric_limits<uint16_t>::max(
 static constexpr uint16_t PLAYER_MIN_SPEED = 10;
 static constexpr uint8_t PLAYER_SOUND_HEALTH_CHANGE = 10;
 
+/**
+ * @brief Represents a player character in the game.
+ *
+ * Inherits from Creature, Cylinder (can hold items), and Bankable (has a bank account).
+ * This class manages all player-specific data and logic, including skills, inventory,
+ * spells, quests, guilds, parties, and interactions with the game world.
+ */
 class Player final : public Creature, public Cylinder, public Bankable {
 public:
 	class PlayerLock {
