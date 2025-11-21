@@ -12,6 +12,12 @@
 #include "server/network/message/networkmessage.hpp"
 #include "server/network/protocol/protocol.hpp"
 
+/**
+ * @brief Manages the server status protocol.
+ *
+ * This class handles requests for server information (e.g., online players, uptime)
+ * typically used by server lists or status checking tools.
+ */
 class ProtocolStatus final : public Protocol {
 public:
 	// static protocol information

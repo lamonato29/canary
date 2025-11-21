@@ -93,6 +93,11 @@ enum PreyTaskDifficult_t : uint8_t {
 
 class NetworkMessage;
 
+/**
+ * @brief Represents a single Prey slot.
+ *
+ * Stores information about the active prey, bonuses, and selection state.
+ */
 class PreySlot {
 public:
 	PreySlot() = default;
@@ -143,6 +148,11 @@ public:
 	int64_t freeRerollTimeStamp = 0;
 };
 
+/**
+ * @brief Represents a single Task Hunting slot.
+ *
+ * Stores information about the active task, kills, and rewards.
+ */
 class TaskHuntingSlot {
 public:
 	TaskHuntingSlot() = default;
@@ -215,6 +225,11 @@ static const std::unique_ptr<PreySlot> &PreySlotNull {};
 static const std::unique_ptr<TaskHuntingSlot> &TaskHuntingSlotNull {};
 static const std::unique_ptr<TaskHuntingOption> &TaskHuntingOptionNull {};
 
+/**
+ * @brief Handles the logic for the Prey and Task Hunting systems.
+ *
+ * Manages player preys, tasks, actions, and rewards.
+ */
 class IOPrey {
 public:
 	IOPrey() = default;
@@ -223,6 +238,11 @@ public:
 	IOPrey(const IOPrey &) = delete;
 	void operator=(const IOPrey &) = delete;
 
+	/**
+	 * @brief Gets the singleton instance of IOPrey.
+	 *
+	 * @return Reference to the IOPrey instance.
+	 */
 	static IOPrey &getInstance();
 
 	void checkPlayerPreys(const std::shared_ptr<Player> &player, uint8_t amount) const;

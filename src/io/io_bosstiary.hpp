@@ -26,6 +26,12 @@ struct LevelInfo {
 class MonsterType;
 class Player;
 
+/**
+ * @brief Manages the Bosstiary system.
+ *
+ * Handles boss kills tracking, boss rarity, levels, boosted bosses, and calculating
+ * boss points and loot bonuses.
+ */
 class IOBosstiary {
 public:
 	IOBosstiary() = default;
@@ -34,11 +40,26 @@ public:
 	IOBosstiary(const IOBosstiary &) = delete;
 	void operator=(const IOBosstiary &) = delete;
 
+	/**
+	 * @brief Gets the singleton instance of IOBosstiary.
+	 *
+	 * @return Reference to the IOBosstiary instance.
+	 */
 	static IOBosstiary &getInstance();
 
+	/**
+	 * @brief Loads the currently boosted boss.
+	 */
 	void loadBoostedBoss();
 
+	/**
+	 * @brief Adds a monster to the Bosstiary.
+	 *
+	 * @param raceId The race ID of the boss.
+	 * @param name The name of the boss.
+	 */
 	void addBosstiaryMonster(uint16_t raceId, const std::string &name);
+
 	const std::map<uint16_t, std::string> &getBosstiaryMap() const;
 
 	const std::map<BosstiaryRarity_t, std::vector<LevelInfo>> levelInfos = {

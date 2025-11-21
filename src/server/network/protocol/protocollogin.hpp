@@ -14,6 +14,12 @@
 class NetworkMessage;
 class OutputMessage;
 
+/**
+ * @brief Manages the login protocol for client communication.
+ *
+ * This class is responsible for handling the initial connection from the client,
+ * authenticating the user (account/password), and sending the character list.
+ */
 class ProtocolLogin final : public Protocol {
 public:
 	// static protocol information

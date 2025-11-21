@@ -17,6 +17,13 @@ class Game;
 class Player;
 class Guild;
 
+/**
+ * @brief Manages saving of game state.
+ *
+ * This class handles the periodic saving of players, guilds, the map,
+ * and the key-value store (KVStore). It uses a thread pool to perform
+ * save operations asynchronously where possible.
+ */
 class SaveManager {
 public:
 	explicit SaveManager(ThreadPool &threadPool, KVStore &kvStore, Logger &logger, Game &game);
@@ -24,12 +31,36 @@ public:
 	SaveManager(const SaveManager &) = delete;
 	void operator=(const SaveManager &) = delete;
 
+	/**
+	 * @brief Gets the singleton instance of SaveManager.
+	 *
+	 * @return Reference to the SaveManager instance.
+	 */
 	static SaveManager &getInstance();
 
+	/**
+	 * @brief Triggers a global save of all game data.
+	 */
 	void saveAll();
+
+	/**
+	 * @brief Schedules a global save operation.
+	 */
 	void scheduleAll();
 
+	/**
+	 * @brief Saves a specific player.
+	 *
+	 * @param player The player to save.
+	 * @return True if the save operation was initiated/successful, false otherwise.
+	 */
 	bool savePlayer(std::shared_ptr<Player> player);
+
+	/**
+	 * @brief Saves a specific guild.
+	 *
+	 * @param guild The guild to save.
+	 */
 	void saveGuild(std::shared_ptr<Guild> guild);
 
 private:

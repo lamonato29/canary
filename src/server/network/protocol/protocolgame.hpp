@@ -88,6 +88,13 @@ struct TextMessage {
 	} primary, secondary;
 };
 
+/**
+ * @brief Manages the game protocol for client communication.
+ *
+ * This class handles parsing incoming packets from the game client, sending updates
+ * about the game state (creatures, map, chat, etc.), and managing the player's
+ * connection lifecycle (login, logout).
+ */
 class ProtocolGame final : public Protocol {
 public:
 	// Static protocol information.

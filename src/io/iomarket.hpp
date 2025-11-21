@@ -13,10 +13,20 @@
 #include "declarations.hpp"
 #include "lib/di/container.hpp"
 
+/**
+ * @brief Handles database operations for the market system.
+ *
+ * This class manages market offers, history, statistics, and expiration processing.
+ */
 class IOMarket {
 public:
 	IOMarket() = default;
 
+	/**
+	 * @brief Gets the singleton instance of IOMarket.
+	 *
+	 * @return Reference to the IOMarket instance.
+	 */
 	static IOMarket &getInstance() {
 		return inject<IOMarket>();
 	}

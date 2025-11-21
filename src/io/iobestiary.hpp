@@ -28,6 +28,9 @@ struct PlayerCharmsByMonster {
 	charmRune_t minor = CHARM_NONE;
 };
 
+/**
+ * @brief Represents a charm rune in the Bestiary system.
+ */
 class Charm {
 public:
 	Charm() = default;
@@ -62,6 +65,12 @@ public:
 	std::vector<double_t> chance;
 };
 
+/**
+ * @brief Manages the Bestiary system.
+ *
+ * Handles monster kill tracking, charm unlocking, charm application in combat,
+ * and charm point management.
+ */
 class IOBestiary {
 public:
 	IOBestiary() = default;
@@ -70,6 +79,11 @@ public:
 	IOBestiary(const IOBestiary &) = delete;
 	void operator=(const IOBestiary &) = delete;
 
+	/**
+	 * @brief Gets the singleton instance of IOBestiary.
+	 *
+	 * @return Reference to the IOBestiary instance.
+	 */
 	static IOBestiary &getInstance();
 
 	std::shared_ptr<Charm> getBestiaryCharm(charmRune_t activeCharm, bool force = false) const;
