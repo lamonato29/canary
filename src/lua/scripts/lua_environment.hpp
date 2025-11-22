@@ -22,6 +22,9 @@ class Cylinder;
 class Game;
 class GlobalFunctions;
 
+/**
+ * @brief Manages the global Lua environment and state.
+ */
 class LuaEnvironment final : public LuaScriptInterface {
 public:
 	static bool shuttingDown;
@@ -35,6 +38,11 @@ public:
 	LuaEnvironment(const LuaEnvironment &) = delete;
 	LuaEnvironment &operator=(const LuaEnvironment &) = delete;
 
+	/**
+	 * @brief Gets the singleton instance of LuaEnvironment.
+	 *
+	 * @return Reference to the LuaEnvironment instance.
+	 */
 	static LuaEnvironment &getInstance();
 
 	bool initState() override;
