@@ -22,6 +22,11 @@ class LuaScriptInterface;
 class Cylinder;
 class Game;
 
+/**
+ * @brief Manages the execution environment for Lua scripts.
+ *
+ * Handles temporary items, results, and script context information.
+ */
 class ScriptEnvironment final {
 public:
 	ScriptEnvironment();
