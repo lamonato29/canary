@@ -16,6 +16,9 @@ enum PlayerSex_t : uint8_t;
 class Player;
 class KV;
 
+/**
+ * @brief Represents a title definition.
+ */
 struct Title {
 	uint8_t m_id = 0;
 	CyclopediaTitle_t m_type = CyclopediaTitle_t::NOTHING;
@@ -65,6 +68,9 @@ struct std::hash<Title> {
 	}
 };
 
+/**
+ * @brief Manages titles for a player.
+ */
 class PlayerTitle {
 public:
 	explicit PlayerTitle(Player &player);

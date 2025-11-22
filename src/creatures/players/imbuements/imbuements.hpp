@@ -18,6 +18,9 @@ class Imbuement;
 
 constexpr int32_t maxSkillOrStatId = std::max<int32_t>(STAT_LAST, SKILL_LAST);
 
+/**
+ * @brief Represents the base data for an imbuement.
+ */
 struct BaseImbuement {
 	BaseImbuement(uint16_t initId, std::string initName, uint32_t initPrice, uint32_t initProtectionPrice, uint32_t initRemoveCost, uint32_t initDuration, uint8_t initPercent) :
 		id(initId), name(std::move(initName)), price(initPrice), protectionPrice(initProtectionPrice), removeCost(initRemoveCost), duration(initDuration), percent(initPercent) { }
@@ -31,6 +34,9 @@ struct BaseImbuement {
 	uint8_t percent;
 };
 
+/**
+ * @brief Represents an imbuement category.
+ */
 struct CategoryImbuement {
 	CategoryImbuement(uint16_t initId, std::string initName, bool initAgressive) :
 		id(initId), name(std::move(initName)), agressive(initAgressive) { }
@@ -40,6 +46,11 @@ struct CategoryImbuement {
 	bool agressive;
 };
 
+/**
+ * @brief Manages the imbuement system.
+ *
+ * Handles loading imbuements from XML, retrieval, and validation.
+ */
 class Imbuements {
 public:
 	Imbuements() = default;

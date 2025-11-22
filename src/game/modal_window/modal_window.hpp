@@ -16,6 +16,9 @@
 	#include <cstdint>
 #endif
 
+/**
+ * @brief Represents a modal window sent to the client.
+ */
 struct ModalWindow {
 	std::list<std::pair<std::string, uint8_t>> buttons, choices;
 	std::string title, message;

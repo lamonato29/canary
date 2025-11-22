@@ -14,6 +14,11 @@
 enum class WheelGemQuality_t : uint8_t;
 enum class WheelGemSupremeModifier_t : uint8_t;
 
+/**
+ * @brief Represents a player vocation (e.g., Knight, Sorcerer, Druid, Paladin).
+ *
+ * Defines attributes such as health/mana gain, skill multipliers, speed, and special abilities.
+ */
 class Vocation {
 public:
 	explicit Vocation(uint16_t initId) :
@@ -119,6 +124,9 @@ private:
 	static uint32_t skillBase[SKILL_LAST + 1];
 };
 
+/**
+ * @brief Manages all vocations in the game.
+ */
 class Vocations {
 public:
 	Vocations() = default;

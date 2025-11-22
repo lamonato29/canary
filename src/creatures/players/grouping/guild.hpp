@@ -13,6 +13,9 @@
 
 class Player;
 
+/**
+ * @brief Represents a rank within a guild.
+ */
 struct GuildRank {
 	uint32_t id;
 	std::string name;
@@ -24,6 +27,11 @@ struct GuildRank {
 
 using GuildRank_ptr = std::shared_ptr<GuildRank>;
 
+/**
+ * @brief Represents a guild in the game.
+ *
+ * A guild has members, ranks, a bank account, and a message of the day (MOTD).
+ */
 class Guild final : public Bankable {
 public:
 	Guild(uint32_t initId, std::string initName) :

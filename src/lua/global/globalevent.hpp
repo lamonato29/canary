@@ -20,6 +20,11 @@ enum LightState_t : uint8_t;
 
 struct LightInfo;
 
+/**
+ * @brief Manages global events.
+ *
+ * Global events are scripts executed at specific times, intervals, or on server startup/shutdown.
+ */
 class GlobalEvents {
 public:
 	GlobalEvents();
@@ -52,6 +57,9 @@ private:
 
 constexpr auto g_globalEvents = GlobalEvents::getInstance;
 
+/**
+ * @brief Represents a single global event definition.
+ */
 class GlobalEvent {
 public:
 	explicit GlobalEvent();

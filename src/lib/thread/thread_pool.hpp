@@ -11,6 +11,11 @@
 
 #include "BS_thread_pool.hpp"
 
+/**
+ * @brief Wrapper for the BS thread pool.
+ *
+ * Provides a thread pool for executing tasks asynchronously.
+ */
 class ThreadPool {
 public:
 	explicit ThreadPool(Logger &logger, const uint32_t threadCount = std::thread::hardware_concurrency());

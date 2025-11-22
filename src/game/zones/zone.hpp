@@ -21,6 +21,9 @@ class Npc;
 class Item;
 class Thing;
 
+/**
+ * @brief Represents a rectangular area in the game world.
+ */
 struct Area {
 	constexpr Area() = default;
 	constexpr Area(Position from, Position to) :
@@ -141,6 +144,11 @@ namespace weak {
 	}
 }
 
+/**
+ * @brief Represents a collection of positions and areas in the game world.
+ *
+ * Zones are used to define regions with specific properties or behaviors (e.g., spawn areas, PvP zones).
+ */
 class Zone {
 public:
 	explicit Zone(std::string name, uint32_t id = 0) :

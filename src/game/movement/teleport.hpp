@@ -14,6 +14,11 @@
 
 class Tile;
 
+/**
+ * @brief Represents a teleport item.
+ *
+ * Transports creatures to a destination position when entered.
+ */
 class Teleport final : public Item, public Cylinder {
 public:
 	explicit Teleport(uint16_t type) :

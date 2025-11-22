@@ -12,6 +12,9 @@
 class Player;
 class Guild;
 
+/**
+ * @brief Interface for entities that can have a bank balance (e.g., Player, Guild).
+ */
 class Bankable {
 public:
 	virtual void setBankBalance(uint64_t amount) = 0;
@@ -27,6 +30,9 @@ public:
 	[[nodiscard]] virtual bool isOnline() const = 0;
 };
 
+/**
+ * @brief Manages banking operations (deposit, withdraw, transfer) for a Bankable entity.
+ */
 class Bank : public SharedObject {
 public:
 	explicit Bank(const std::shared_ptr<Bankable> &bankable);

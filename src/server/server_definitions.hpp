@@ -20,6 +20,9 @@ enum { XTEA_MULTIPLE = 8 };
 enum { MAX_BODY_LENGTH = NETWORKMESSAGE_MAXSIZE - HEADER_LENGTH - CHECKSUM_LENGTH - XTEA_MULTIPLE };
 enum { MAX_PROTOCOL_BODY_LENGTH = MAX_BODY_LENGTH - 10 };
 
+/**
+ * @brief Represents the state of a network connection.
+ */
 enum ConnectionState_t : uint8_t {
 	CONNECTION_STATE_OPEN,
 	CONNECTION_STATE_IDENTIFYING,
@@ -29,6 +32,9 @@ enum ConnectionState_t : uint8_t {
 // Connection and networkmessage.
 
 // Protocol.
+/**
+ * @brief Flags for requested server information.
+ */
 enum RequestedInfo_t : uint16_t {
 	REQUEST_BASIC_SERVER_INFO = 1 << 0,
 	REQUEST_OWNER_SERVER_INFO = 1 << 1,

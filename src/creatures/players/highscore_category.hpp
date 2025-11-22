@@ -9,6 +9,9 @@
 
 #pragma once
 
+/**
+ * @brief Represents a category for highscores.
+ */
 struct HighscoreCategory {
 	HighscoreCategory(std::string name, uint8_t id) :
 		m_name(std::move(name)),

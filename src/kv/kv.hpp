@@ -23,6 +23,11 @@
 
 #include "kv/value_wrapper.hpp"
 
+/**
+ * @brief Abstract base class for a Key-Value store.
+ *
+ * Provides an interface for setting, getting, and managing key-value pairs.
+ */
 class KV : public std::enable_shared_from_this<KV> {
 public:
 	virtual ~KV() = default;
@@ -72,6 +77,11 @@ private:
 	static std::mutex mutex_;
 };
 
+/**
+ * @brief Implementation of a Key-Value store with caching.
+ *
+ * Manages an in-memory cache (LRU) and handles persistence operations (save/load) via virtual methods.
+ */
 class KVStore : public KV {
 public:
 	static constexpr size_t MAX_SIZE = 1000000;
@@ -134,6 +144,11 @@ private:
 	std::vector<std::pair<std::string, ValueWrapper>> pendingEvictions_;
 };
 
+/**
+ * @brief Represents a scoped view of the Key-Value store.
+ *
+ * Prefixes all keys with a specific scope string.
+ */
 class ScopedKV final : public KV {
 public:
 	ScopedKV(Logger &logger, KVStore &rootKV, std::string prefix) :

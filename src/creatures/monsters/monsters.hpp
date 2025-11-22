@@ -17,6 +17,9 @@
 class LuaScriptInterface;
 class ConditionDamage;
 
+/**
+ * @brief Represents a loot drop configuration.
+ */
 class Loot {
 public:
 	Loot() = default;
@@ -43,6 +46,12 @@ struct spellBlock_t {
 	SoundEffect_t soundCastEffect = SoundEffect_t::SILENCE;
 };
 
+/**
+ * @brief Defines the type and static properties of a Monster.
+ *
+ * Stores all configuration data loaded from monster files (XML/Lua),
+ * including health, skills, spells, loot, and behavior flags.
+ */
 class MonsterType {
 	struct MonsterInfo {
 		LuaScriptInterface* scriptInterface {};
@@ -236,6 +245,11 @@ public:
 	SoundEffect_t soundCastEffect = SoundEffect_t::SILENCE;
 };
 
+/**
+ * @brief Manages all MonsterType definitions.
+ *
+ * Responsible for loading, storing, and retrieving monster types.
+ */
 class Monsters {
 public:
 	Monsters() = default;

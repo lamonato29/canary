@@ -11,6 +11,11 @@
 
 #include "items/containers/container.hpp"
 
+/**
+ * @brief Represents a chest inside a depot locker.
+ *
+ * Stores items for a player within their depot.
+ */
 class DepotChest final : public Container {
 public:
 	explicit DepotChest(uint16_t type);

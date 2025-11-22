@@ -10,10 +10,11 @@
 #pragma once
 
 /**
- * Team assemble finder.
- * This class is responsible control and manage the team finder feature.
- **/
-
+ * @brief Manages the Team Finder feature.
+ *
+ * Allows players to assemble teams for various activities (hunts, bosses, quests).
+ * Tracks team requirements, current members, and other metadata.
+ */
 class TeamFinder final {
 public:
 	TeamFinder() = default;

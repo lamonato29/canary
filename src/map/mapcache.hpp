@@ -79,6 +79,11 @@ private:
 
 #pragma pack()
 
+/**
+ * @brief Caches map data for performance optimization.
+ *
+ * Manages map sectors and basic item/tile representations to speed up map loading and access.
+ */
 class MapCache {
 public:
 	virtual ~MapCache() = default;

@@ -9,6 +9,9 @@
 
 #pragma once
 
+/**
+ * @brief Represents an Aura effect attached to a creature.
+ */
 struct Aura {
 	Aura(uint16_t initId, const std::string &name) :
 		id(initId), name(name) { }
@@ -16,6 +19,9 @@ struct Aura {
 	std::string name;
 };
 
+/**
+ * @brief Represents a Shader effect applied to a creature.
+ */
 struct Shader {
 	Shader(uint8_t initId, const std::string &name) :
 		id(initId), name(name) { }
@@ -23,6 +29,9 @@ struct Shader {
 	std::string name;
 };
 
+/**
+ * @brief Represents a generic visual Effect attached to a creature.
+ */
 struct Effect {
 	Effect(uint16_t initId, const std::string &name) :
 		id(initId), name(name) { }
@@ -30,6 +39,9 @@ struct Effect {
 	std::string name;
 };
 
+/**
+ * @brief Represents a Wing effect attached to a creature.
+ */
 struct Wing {
 	Wing(uint16_t initId, const std::string &name) :
 		id(initId), name(name) { }
@@ -37,9 +49,25 @@ struct Wing {
 	std::string name;
 };
 
+/**
+ * @brief Manages the collection of all available attached effects (Auras, Shaders, Wings, Effects).
+ *
+ * Loads definitions from XML and provides retrieval by ID or Name.
+ */
 class AttachedEffects {
 public:
+	/**
+	 * @brief Reloads the attached effects from the XML configuration.
+	 *
+	 * @return True if reload was successful, false otherwise.
+	 */
 	bool reload();
+
+	/**
+	 * @brief Loads the attached effects from the XML configuration.
+	 *
+	 * @return True if loading was successful, false otherwise.
+	 */
 	bool loadFromXml();
 
 	std::shared_ptr<Aura> getAuraByID(uint8_t id);

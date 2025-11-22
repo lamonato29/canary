@@ -11,6 +11,9 @@
 
 #include "map/map.hpp"
 
+/**
+ * @brief Handles serialization and deserialization of map data, specifically house items.
+ */
 class IOMapSerialize {
 public:
 	static void loadHouseItems(Map* map);

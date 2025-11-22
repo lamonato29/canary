@@ -12,6 +12,9 @@
 class Player;
 class KV;
 
+/**
+ * @brief Represents an achievement definition.
+ */
 struct Achievement {
 	Achievement() = default;
 
@@ -26,6 +29,9 @@ struct Achievement {
 	uint16_t id = 0;
 };
 
+/**
+ * @brief Manages achievements for a player.
+ */
 class PlayerAchievement {
 public:
 	explicit PlayerAchievement(Player &player);

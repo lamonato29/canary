@@ -12,6 +12,11 @@
 #include "items/item.hpp"
 #include "items/cylinder.hpp"
 
+/**
+ * @brief Represents a trash holder item.
+ *
+ * Items placed in a trash holder are removed from the game.
+ */
 class TrashHolder final : public Item, public Cylinder {
 public:
 	explicit TrashHolder(uint16_t itemId) :

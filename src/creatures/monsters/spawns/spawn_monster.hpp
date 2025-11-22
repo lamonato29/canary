@@ -16,6 +16,9 @@ struct Position;
 class Monster;
 class MonsterType;
 
+/**
+ * @brief Represents a single spawn definition for monsters.
+ */
 struct spawnBlock_t {
 	Position pos;
 	std::unordered_map<std::shared_ptr<MonsterType>, uint32_t> monsterTypes {};
@@ -27,6 +30,9 @@ struct spawnBlock_t {
 	bool hasBoss() const;
 };
 
+/**
+ * @brief Manages the spawning of monsters in a specific area.
+ */
 class SpawnMonster : public SharedObject {
 public:
 	SpawnMonster(Position initPos, int32_t initRadius) :
@@ -77,6 +83,9 @@ private:
 	void scheduleSpawn(uint32_t spawnMonsterId, spawnBlock_t &sb, const std::shared_ptr<MonsterType> &monsterType, uint16_t interval, bool startup = false);
 };
 
+/**
+ * @brief Manages multiple monster spawns loaded from XML.
+ */
 class SpawnsMonster {
 public:
 	static bool isInZone(const Position &centerPos, int32_t radius, const Position &pos);

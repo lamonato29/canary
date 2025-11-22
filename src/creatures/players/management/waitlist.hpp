@@ -30,6 +30,9 @@ struct WaitListInfo {
 	phmap::flat_hash_map<uint32_t, std::pair<WaitList::iterator, std::size_t>> playerReferences;
 };
 
+/**
+ * @brief Manages the server's login wait list (queue).
+ */
 class WaitingList {
 public:
 	WaitingList();

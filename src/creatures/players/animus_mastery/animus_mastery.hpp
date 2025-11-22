@@ -13,6 +13,12 @@ class Player;
 class PropStream;
 class PropWriteStream;
 
+/**
+ * @brief Manages the Animus Mastery system for a player.
+ *
+ * This system allows players to specialize in hunting specific monsters,
+ * gaining experience bonuses.
+ */
 class AnimusMastery {
 public:
 	explicit AnimusMastery(Player &player);

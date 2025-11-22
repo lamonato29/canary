@@ -21,6 +21,9 @@ enum class WheelGemBasicModifier_t : uint8_t;
 enum class WheelGemSupremeModifier_t : uint8_t;
 enum class WheelStat_t : uint8_t;
 
+/**
+ * @brief Interface for strategies applying modifiers from Wheel Gems.
+ */
 class GemModifierStrategy {
 public:
 	explicit GemModifierStrategy(PlayerWheel &wheel) :

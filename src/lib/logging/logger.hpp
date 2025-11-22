@@ -14,6 +14,12 @@ namespace spdlog {
 	class logger;
 }
 
+/**
+ * @brief Abstract base class for logging.
+ *
+ * Defines the interface for logging at various levels (info, warn, error, critical, debug, trace)
+ * and for performance profiling.
+ */
 class Logger {
 public:
 	Logger() = default;
@@ -23,7 +29,18 @@ public:
 	Logger(const Logger &) = delete;
 	virtual Logger &operator=(const Logger &) = delete;
 
+	/**
+	 * @brief Sets the logging level.
+	 *
+	 * @param name The name of the log level (e.g., "debug", "info").
+	 */
 	virtual void setLevel(const std::string &name) const = 0;
+
+	/**
+	 * @brief Gets the current logging level.
+	 *
+	 * @return The name of the current log level.
+	 */
 	virtual std::string getLevel() const = 0;
 
 	/**

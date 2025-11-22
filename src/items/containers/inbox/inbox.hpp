@@ -11,6 +11,11 @@
 
 #include "items/containers/container.hpp"
 
+/**
+ * @brief Represents an inbox container.
+ *
+ * Used for receiving items (e.g., market purchases, gifts).
+ */
 class Inbox final : public Container {
 public:
 	explicit Inbox(uint16_t type);

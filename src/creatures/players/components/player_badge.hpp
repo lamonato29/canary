@@ -15,6 +15,9 @@ class Account;
 
 enum class CyclopediaBadge_t : uint8_t;
 
+/**
+ * @brief Represents a badge definition.
+ */
 struct Badge {
 	uint8_t m_id = 0;
 	CyclopediaBadge_t m_type {};
@@ -38,6 +41,9 @@ struct std::hash<Badge> {
 	}
 };
 
+/**
+ * @brief Manages badges for a player.
+ */
 class PlayerBadge {
 public:
 	explicit PlayerBadge(Player &player);

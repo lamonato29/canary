@@ -35,6 +35,12 @@ struct SpectatorsCache {
 	FloorData players;
 };
 
+/**
+ * @brief Helper class for finding and managing spectators (creatures nearby).
+ *
+ * Provides methods to efficiently find players, monsters, or all creatures within a specific range
+ * or on the same screen, with caching support.
+ */
 class Spectators {
 public:
 	static void clearCache();

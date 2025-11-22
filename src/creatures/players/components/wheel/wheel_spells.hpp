@@ -9,6 +9,9 @@
 
 #pragma once
 
+/**
+ * @brief Namespace containing structures for Wheel of Destiny spell bonuses.
+ */
 namespace WheelSpells {
 	struct Increase {
 		bool area = false;

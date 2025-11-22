@@ -9,6 +9,9 @@
 
 #pragma once
 
+/**
+ * @brief Structure holding ban information.
+ */
 struct BanInfo {
 	std::string bannedBy {};
 	std::string reason {};
@@ -26,6 +29,9 @@ struct ConnectBlock {
 
 using IpConnectMap = std::map<uint32_t, ConnectBlock>;
 
+/**
+ * @brief Manages connection blocking and IP tracking.
+ */
 class Ban {
 public:
 	bool acceptConnection(uint32_t clientIP);
@@ -35,6 +41,9 @@ private:
 	std::recursive_mutex lock;
 };
 
+/**
+ * @brief Handles database operations for bans.
+ */
 class IOBan {
 public:
 	static bool isAccountBanned(uint32_t accountId, BanInfo &banInfo);

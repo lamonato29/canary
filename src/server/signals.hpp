@@ -9,6 +9,9 @@
 
 #pragma once
 
+/**
+ * @brief Manages system signals (SIGINT, SIGTERM, etc.).
+ */
 class Signals {
 	asio::signal_set set;
 

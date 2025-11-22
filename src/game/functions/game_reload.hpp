@@ -33,6 +33,9 @@ enum class Reload_t : uint8_t {
 	RELOAD_TYPE_LAST
 };
 
+/**
+ * @brief Manages reloading of various game systems at runtime.
+ */
 class GameReload {
 public:
 	GameReload();
@@ -42,6 +45,11 @@ public:
 	GameReload(const GameReload &) = delete;
 	GameReload &operator=(const GameReload &) = delete;
 
+	/**
+	 * @brief Gets the singleton instance of GameReload.
+	 *
+	 * @return Reference to the GameReload instance.
+	 */
 	static GameReload &getInstance();
 
 	static bool init(Reload_t reloadType);

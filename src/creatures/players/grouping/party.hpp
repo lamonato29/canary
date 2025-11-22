@@ -28,6 +28,11 @@ class Party;
 class Item;
 class Creature;
 
+/**
+ * @brief Manages a party of players.
+ *
+ * Handles invitations, joining/leaving, leadership, shared experience, and party analysis.
+ */
 class Party final : public SharedObject {
 public:
 	static std::shared_ptr<Party> create(const std::shared_ptr<Player> &leader);

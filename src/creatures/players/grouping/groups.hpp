@@ -11,6 +11,9 @@
 
 #include "utils/utils_definitions.hpp"
 
+/**
+ * @brief Represents a player group with permissions and limits.
+ */
 struct Group {
 	std::string name;
 	std::array<bool, magic_enum::enum_integer(PlayerFlags_t::FlagLast)> flags { false };
@@ -20,6 +23,9 @@ struct Group {
 	bool access;
 };
 
+/**
+ * @brief Manages player groups.
+ */
 class Groups {
 public:
 	static uint8_t getFlagNumber(PlayerFlags_t playerFlags);

@@ -12,6 +12,11 @@
 #include "items/item.hpp"
 #include "items/cylinder.hpp"
 
+/**
+ * @brief Represents a mailbox item.
+ *
+ * Allows players to send parcels and letters to other players.
+ */
 class Mailbox final : public Item, public Cylinder {
 public:
 	explicit Mailbox(uint16_t itemId) :

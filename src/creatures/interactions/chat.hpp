@@ -19,6 +19,9 @@ class Player;
 using UsersMap = std::map<uint32_t, std::shared_ptr<Player>>;
 using InvitedMap = std::map<uint32_t, std::shared_ptr<Player>>;
 
+/**
+ * @brief Represents a chat channel.
+ */
 class ChatChannel {
 public:
 	ChatChannel() = default;
@@ -63,6 +66,9 @@ protected:
 	friend class Chat;
 };
 
+/**
+ * @brief Represents a private chat channel.
+ */
 class PrivateChatChannel final : public ChatChannel {
 public:
 	PrivateChatChannel(uint16_t channelId, [[maybe_unused]] std::string channelName);
@@ -88,6 +94,9 @@ private:
 
 using ChannelList = std::list<std::shared_ptr<ChatChannel>>;
 
+/**
+ * @brief Manages chat channels and interactions.
+ */
 class Chat {
 public:
 	Chat();
@@ -96,6 +105,11 @@ public:
 	Chat(const Chat &) = delete;
 	Chat &operator=(const Chat &) = delete;
 
+	/**
+	 * @brief Gets the singleton instance of Chat.
+	 *
+	 * @return Reference to the Chat instance.
+	 */
 	static Chat &getInstance();
 
 	bool load();

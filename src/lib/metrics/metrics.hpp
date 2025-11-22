@@ -44,6 +44,9 @@ namespace metrics {
 	template <typename T>
 	using UpDownCounter = opentelemetry::nostd::unique_ptr<metrics_api::UpDownCounter<T>>;
 
+	/**
+	 * @brief Configuration options for the Metrics system.
+	 */
 	struct Options {
 		bool enablePrometheusExporter;
 		bool enableOStreamExporter;
@@ -92,6 +95,11 @@ namespace metrics {
 		"lock_latency",
 	};
 
+	/**
+	 * @brief Central class for managing application metrics.
+	 *
+	 * Wraps OpenTelemetry functionality to provide histograms, counters, and gauges.
+	 */
 	class Metrics final {
 	public:
 		Metrics() = default;
@@ -198,6 +206,9 @@ namespace metrics {
 		"lock_latency",
 	};
 
+	/**
+	 * @brief Dummy Metrics class for when FEATURE_METRICS is disabled.
+	 */
 	class Metrics final {
 	public:
 		Metrics() = default;

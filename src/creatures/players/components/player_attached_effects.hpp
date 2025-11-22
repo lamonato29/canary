@@ -16,6 +16,9 @@ struct Effect;
 struct Shader;
 class Creature;
 
+/**
+ * @brief Manages the attached effects (Auras, Wings, Shaders) for a player.
+ */
 class PlayerAttachedEffects {
 public:
 	explicit PlayerAttachedEffects(Player &player);

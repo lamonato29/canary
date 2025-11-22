@@ -16,7 +16,9 @@ struct TierInfo {
 	uint64_t convergenceTransferPrice = 0;
 };
 
-// Classification class for forging system and market.
+/**
+ * @brief Represents item classification for the forging system and market.
+ */
 class ItemClassification final {
 public:
 	ItemClassification() = default;

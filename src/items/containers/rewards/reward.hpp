@@ -11,6 +11,11 @@
 
 #include "items/containers/container.hpp"
 
+/**
+ * @brief Represents a single reward container.
+ *
+ * Part of the reward chest system.
+ */
 class Reward final : public Container {
 public:
 	explicit Reward();

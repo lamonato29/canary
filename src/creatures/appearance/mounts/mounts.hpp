@@ -9,6 +9,11 @@
 
 #pragma once
 
+/**
+ * @brief Represents a Mount in the game.
+ *
+ * A mount provides speed bonuses and visual changes to the character.
+ */
 struct Mount {
 	Mount(uint8_t initId, uint16_t initClientId, std::string initName, int32_t initSpeed, bool initPremium, std::string initType) :
 		name(std::move(initName)), speed(initSpeed), clientId(initClientId), id(initId), premium(initPremium),
@@ -22,10 +27,27 @@ struct Mount {
 	std::string type;
 };
 
+/**
+ * @brief Manages the collection of all available mounts.
+ *
+ * Loads mount definitions from XML and allows retrieval by various identifiers.
+ */
 class Mounts {
 public:
+	/**
+	 * @brief Reloads the mounts from the XML configuration.
+	 *
+	 * @return True if reload was successful, false otherwise.
+	 */
 	bool reload();
+
+	/**
+	 * @brief Loads the mounts from the XML configuration.
+	 *
+	 * @return True if loading was successful, false otherwise.
+	 */
 	bool loadFromXml();
+
 	std::shared_ptr<Mount> getMountByID(uint8_t id);
 	std::shared_ptr<Mount> getMountByName(const std::string &name);
 	std::shared_ptr<Mount> getMountByClientID(uint16_t clientId);

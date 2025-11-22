@@ -12,6 +12,11 @@
 #include "items/containers/container.hpp"
 #include "items/containers/inbox/inbox.hpp"
 
+/**
+ * @brief Represents a depot locker container.
+ *
+ * A depot locker acts as the main container for a player's depot, containing chests and other items.
+ */
 class DepotLocker final : public Container {
 public:
 	explicit DepotLocker(uint16_t type, uint16_t size);

@@ -12,6 +12,9 @@
 #include "game/movement/position.hpp"
 #include "utils/tools.hpp"
 
+/**
+ * @brief Represents a town in the game world.
+ */
 class Town {
 public:
 	explicit Town(uint32_t initId) :
@@ -42,6 +45,9 @@ private:
 
 using TownMap = std::map<uint32_t, std::shared_ptr<Town>>;
 
+/**
+ * @brief Manages the collection of all towns.
+ */
 class Towns {
 public:
 	Towns() = default;

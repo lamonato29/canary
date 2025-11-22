@@ -31,6 +31,9 @@ struct LuaVariant;
 using WeaponUnique_ptr = std::unique_ptr<Weapon>;
 using WeaponShared_ptr = std::shared_ptr<Weapon>;
 
+/**
+ * @brief Manages all weapon instances.
+ */
 class Weapons {
 public:
 	Weapons();
@@ -56,6 +59,11 @@ private:
 
 constexpr auto g_weapons = Weapons::getInstance;
 
+/**
+ * @brief Base class for all weapons.
+ *
+ * Handles weapon configuration, usage logic, damage calculation, and script interaction.
+ */
 class Weapon {
 public:
 	Weapon();

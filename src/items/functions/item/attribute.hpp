@@ -12,6 +12,9 @@
 #include "enums/item_attribute.hpp"
 #include "items/functions/item/custom_attribute.hpp"
 
+/**
+ * @brief Helper class for item attribute operations.
+ */
 class ItemAttributeHelper {
 public:
 	static bool isAttributeInteger(ItemAttribute_t type) {
@@ -65,6 +68,9 @@ public:
 	}
 };
 
+/**
+ * @brief Represents a single attribute of an item.
+ */
 class Attributes : public ItemAttributeHelper {
 public:
 	explicit Attributes(ItemAttribute_t type) :
@@ -123,6 +129,11 @@ private:
 	std::variant<int64_t, std::string> value;
 };
 
+/**
+ * @brief Manages a collection of attributes for an item.
+ *
+ * Handles standard attributes (integer/string) and custom attributes.
+ */
 class ItemAttribute : public ItemAttributeHelper {
 public:
 	ItemAttribute() = default;

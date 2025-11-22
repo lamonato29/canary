@@ -13,6 +13,9 @@
 
 class Player;
 
+/**
+ * @brief Represents a group of VIP players.
+ */
 class VIPGroup {
 public:
 	uint8_t id = 0;
@@ -25,6 +28,9 @@ public:
 		id(id), name(std::move(name)), customizable(customizable) { }
 };
 
+/**
+ * @brief Manages the VIP list and groups for a player.
+ */
 class PlayerVIP {
 public:
 	explicit PlayerVIP(Player &player);

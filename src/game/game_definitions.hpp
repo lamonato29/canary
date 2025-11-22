@@ -10,6 +10,9 @@
 #pragma once
 
 // Enums
+/**
+ * @brief Types of stack position searches.
+ */
 enum StackPosType_t {
 	STACKPOS_MOVE,
 	STACKPOS_LOOK,
@@ -19,12 +22,18 @@ enum StackPosType_t {
 	STACKPOS_FIND_THING,
 };
 
+/**
+ * @brief Server world types (PvP rules).
+ */
 enum WorldType_t {
 	WORLD_TYPE_NO_PVP = 1,
 	WORLD_TYPE_PVP = 2,
 	WORLD_TYPE_PVP_ENFORCED = 3,
 };
 
+/**
+ * @brief Current state of the game server.
+ */
 enum GameState_t {
 	GAME_STATE_STARTUP,
 	GAME_STATE_INIT,
@@ -40,6 +49,9 @@ enum QuickLootFilter_t {
 	QUICKLOOTFILTER_ACCEPTEDLOOT = 1,
 };
 
+/**
+ * @brief Factions for creatures.
+ */
 enum Faction_t {
 	FACTION_DEFAULT = 0,
 	FACTION_PLAYER = 1,

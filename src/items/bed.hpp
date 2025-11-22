@@ -14,6 +14,11 @@
 class House;
 class Player;
 
+/**
+ * @brief Represents a bed item in a house.
+ *
+ * Players can sleep in beds to regenerate health and mana while offline.
+ */
 class BedItem final : public Item {
 public:
 	explicit BedItem(uint16_t id);

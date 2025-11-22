@@ -17,6 +17,11 @@ class Creature;
 
 static constexpr int32_t INDEX_WHEREEVER = -1;
 
+/**
+ * @brief Interface for objects that can hold other objects.
+ *
+ * Examples include containers (backpacks, chests) and creatures (inventory slots).
+ */
 class Cylinder : virtual public Thing {
 public:
 	/**

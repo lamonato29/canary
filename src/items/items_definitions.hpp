@@ -12,6 +12,9 @@
 class Imbuement;
 
 // Enums
+/**
+ * @brief Properties that an item can have.
+ */
 enum ItemProperty {
 	CONST_PROP_BLOCKSOLID = 0,
 	CONST_PROP_HASHEIGHT,
@@ -33,6 +36,9 @@ enum Attr_ReadValue {
 	ATTR_READ_END,
 };
 
+/**
+ * @brief Error codes returned by various actions (e.g., moving items, casting spells).
+ */
 enum ReturnValue : uint16_t {
 	RETURNVALUE_NOERROR,
 	RETURNVALUE_NOTBOUGHTINSTORE,
@@ -137,6 +143,9 @@ enum ItemGroup_t {
 	ITEM_GROUP_LAST
 };
 
+/**
+ * @brief Categorizes items by their type (weapon, armor, container, etc.).
+ */
 enum ItemTypes_t {
 	ITEM_TYPE_NONE,
 

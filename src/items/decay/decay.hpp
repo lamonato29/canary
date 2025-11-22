@@ -11,6 +11,11 @@
 
 class Item;
 
+/**
+ * @brief Manages item decay.
+ *
+ * Handles items that decay over time (e.g., corpses, torches, rings).
+ */
 class Decay {
 public:
 	Decay() = default;

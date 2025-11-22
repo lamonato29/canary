@@ -12,6 +12,9 @@
 class Player;
 class KV;
 
+/**
+ * @brief Represents a summary of player statistics.
+ */
 struct Summary {
 	uint16_t m_preyWildcards = 0;
 	uint16_t m_instantRewards = 0;
@@ -21,6 +24,11 @@ struct Summary {
 		m_preyWildcards(mPreyWildcards), m_instantRewards(mInstantRewards), m_hirelings(mHirelings) { }
 };
 
+/**
+ * @brief Manages Cyclopedia-related data for a player.
+ *
+ * Handles summaries, death history, recent kills, and store statistics.
+ */
 class PlayerCyclopedia {
 public:
 	explicit PlayerCyclopedia(Player &player);

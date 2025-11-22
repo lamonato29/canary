@@ -9,6 +9,9 @@
 
 #pragma once
 
+/**
+ * @brief Manages global storage keys loaded from XML.
+ */
 class Storages {
 public:
 	Storages() = default;

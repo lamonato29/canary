@@ -18,6 +18,11 @@
 class Module;
 using Module_ptr = std::shared_ptr<Module>;
 
+/**
+ * @brief Represents a script module.
+ *
+ * Modules are Lua scripts that can hook into network messages (recvbyte).
+ */
 class Module final : public Event {
 public:
 	explicit Module(LuaScriptInterface* interface);
@@ -55,6 +60,9 @@ protected:
 	bool loaded;
 };
 
+/**
+ * @brief Manages all script modules.
+ */
 class Modules final : public BaseEvents {
 public:
 	Modules();
@@ -63,6 +71,11 @@ public:
 	Modules(const Modules &) = delete;
 	Modules &operator=(const Modules &) = delete;
 
+	/**
+	 * @brief Gets the singleton instance of Modules.
+	 *
+	 * @return Reference to the Modules instance.
+	 */
 	static Modules &getInstance() {
 		return inject<Modules>();
 	}

@@ -9,12 +9,18 @@
 
 #pragma once
 
+/**
+ * @brief Represents a familiar entry.
+ */
 struct FamiliarEntry {
 	constexpr explicit FamiliarEntry(uint16_t initLookType) :
 		lookType(initLookType) { }
 	uint16_t lookType;
 };
 
+/**
+ * @brief Represents a Familiar definition.
+ */
 struct Familiar {
 	Familiar(std::string initName, uint16_t initLookType, bool initPremium, bool initUnlocked, std::string initType) :
 		name(std::move(initName)), lookType(initLookType),
@@ -28,6 +34,9 @@ struct Familiar {
 	std::string type;
 };
 
+/**
+ * @brief Manages familiars in the game.
+ */
 class Familiars {
 public:
 	static Familiars &getInstance();

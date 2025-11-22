@@ -14,6 +14,9 @@
 class Npc;
 class NpcType;
 
+/**
+ * @brief Represents a single spawn definition for an NPC.
+ */
 struct spawnBlockNpc_t {
 	Position pos;
 	std::shared_ptr<NpcType> npcType;
@@ -22,6 +25,9 @@ struct spawnBlockNpc_t {
 	Direction direction;
 };
 
+/**
+ * @brief Manages the spawning of NPCs in a specific area.
+ */
 class SpawnNpc final : public SharedObject {
 public:
 	SpawnNpc(Position initPos, int32_t initRadius) :
@@ -65,6 +71,9 @@ private:
 	void scheduleSpawnNpc(uint32_t spawnId, spawnBlockNpc_t &sb, uint16_t interval);
 };
 
+/**
+ * @brief Manages multiple NPC spawns loaded from XML.
+ */
 class SpawnsNpc {
 public:
 	static bool isInZone(const Position &centerPos, int32_t radius, const Position &pos);

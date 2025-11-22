@@ -9,6 +9,11 @@
 
 #pragma once
 
+/**
+ * @brief Provides a stream-like interface for reading data from a memory buffer.
+ *
+ * Typically used for parsing binary file formats like OTB or OTBM.
+ */
 class FileStream {
 public:
 	FileStream(const char* begin, const char* end) {

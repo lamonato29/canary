@@ -10,11 +10,17 @@
 #pragma once
 
 // Enums
+/**
+ * @brief Access list types for houses.
+ */
 enum AccessList_t {
 	GUEST_LIST = 0x100,
 	SUBOWNER_LIST = 0x101,
 };
 
+/**
+ * @brief House access levels.
+ */
 enum AccessHouseLevel_t {
 	HOUSE_NOT_INVITED = 0,
 	HOUSE_GUEST = 1,
@@ -22,6 +28,9 @@ enum AccessHouseLevel_t {
 	HOUSE_OWNER = 3,
 };
 
+/**
+ * @brief Rent periods for houses.
+ */
 enum RentPeriod_t {
 	RENTPERIOD_DAILY,
 	RENTPERIOD_WEEKLY,
@@ -30,6 +39,9 @@ enum RentPeriod_t {
 	RENTPERIOD_NEVER,
 };
 
+/**
+ * @brief Flags for sight checks.
+ */
 enum SightLines_t : uint8_t {
 	SightLine_NoCheck = 0,
 	SightLine_CheckSightLine = 1 << 0,

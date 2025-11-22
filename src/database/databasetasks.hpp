@@ -12,6 +12,9 @@
 #include "database/database.hpp"
 #include "lib/thread/thread_pool.hpp"
 
+/**
+ * @brief Manages asynchronous database tasks.
+ */
 class DatabaseTasks {
 public:
 	DatabaseTasks(ThreadPool &threadPool, Database &db);

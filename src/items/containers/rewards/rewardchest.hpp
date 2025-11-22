@@ -11,6 +11,11 @@
 
 #include "items/containers/container.hpp"
 
+/**
+ * @brief Represents the reward chest container.
+ *
+ * Holds rewards for players (e.g., from bosses).
+ */
 class RewardChest final : public Container {
 public:
 	explicit RewardChest(uint16_t type);

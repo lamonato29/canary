@@ -11,6 +11,9 @@
 
 #include "database/database.hpp"
 
+/**
+ * @brief Manages database schema updates and optimization.
+ */
 class DatabaseManager {
 public:
 	static bool tableExists(const std::string &table);
