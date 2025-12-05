@@ -14,6 +14,11 @@
 #include "lua/functions/core/libs/core_libs_functions.hpp"
 #include "lua/functions/core/network/core_network_functions.hpp"
 
+/**
+ * @brief Central class for initializing core Lua functions.
+ *
+ * Initializes game, libraries, and network functions for Lua scripts.
+ */
 class CoreFunctions final : LuaScriptInterface {
 public:
 	explicit CoreFunctions(lua_State* L) :

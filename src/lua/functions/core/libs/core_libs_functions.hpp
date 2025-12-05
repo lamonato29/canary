@@ -16,6 +16,9 @@
 #include "lua/functions/core/libs/metrics_functions.hpp"
 #include "lua/functions/core/libs/kv_functions.hpp"
 
+/**
+ * @brief Initializes core library functions for Lua.
+ */
 class CoreLibsFunctions final : LuaScriptInterface {
 public:
 	explicit CoreLibsFunctions(lua_State* L) :

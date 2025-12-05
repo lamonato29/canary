@@ -13,6 +13,9 @@
 #include "lua/functions/core/network/network_message_functions.hpp"
 #include "lua/functions/core/network/webhook_functions.hpp"
 
+/**
+ * @brief Initializes core network functions for Lua.
+ */
 class CoreNetworkFunctions final : LuaScriptInterface {
 public:
 	explicit CoreNetworkFunctions(lua_State* L) :

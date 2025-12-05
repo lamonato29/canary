@@ -16,6 +16,9 @@
 #include "lua/functions/map/tile_functions.hpp"
 #include "lua/functions/map/town_functions.hpp"
 
+/**
+ * @brief Initializes map-related Lua functions.
+ */
 class MapFunctions final : LuaScriptInterface {
 public:
 	explicit MapFunctions(lua_State* L) :

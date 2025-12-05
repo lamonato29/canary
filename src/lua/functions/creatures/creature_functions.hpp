@@ -13,6 +13,12 @@
 #include "lua/functions/creatures/monster/monster_functions.hpp"
 #include "lua/functions/creatures/npc/npc_functions.hpp"
 #include "lua/functions/creatures/player/player_functions.hpp"
+
+/**
+ * @brief Provides Lua bindings for creature-related functionality.
+ *
+ * Manages creature lifecycle, properties, movement, combat, and interaction through Lua.
+ */
 class CreatureFunctions {
 public:
 	static void init(lua_State* L);

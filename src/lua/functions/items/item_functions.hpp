@@ -13,6 +13,12 @@
 #include "lua/functions/items/imbuement_functions.hpp"
 #include "lua/functions/items/item_type_functions.hpp"
 #include "lua/functions/items/weapon_functions.hpp"
+
+/**
+ * @brief Provides Lua bindings for item-related functionality.
+ *
+ * Manages item properties, movement, attributes, transformations, and interactions.
+ */
 class ItemFunctions {
 public:
 	static void init(lua_State* L);

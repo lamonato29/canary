@@ -18,6 +18,9 @@
 #include "lua/functions/events/talk_action_functions.hpp"
 #include "lua/functions/events/event_callback_functions.hpp"
 
+/**
+ * @brief Initializes Lua bindings for various event types.
+ */
 class EventFunctions final : LuaScriptInterface {
 public:
 	explicit EventFunctions(lua_State* L) :

@@ -17,6 +17,9 @@
 #include "lua/functions/core/game/lua_enums.hpp"
 #include "lua/functions/core/game/modal_window_functions.hpp"
 
+/**
+ * @brief Initializes core game-related Lua functions.
+ */
 class CoreGameFunctions final : LuaScriptInterface {
 public:
 	explicit CoreGameFunctions(lua_State* L) :
